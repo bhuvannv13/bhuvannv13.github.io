@@ -3,8 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bhuvann Vinodh Ram | AI in Medicine</title>
-<meta name="description" content="Portfolio of Bhuvann Vinodh Ram: machine learning and deep learning for medical imaging, genomics and healthcare data.">
+<title>Bhuvann Vinodh Ram | Data and AI</title>
+<meta name="description" content="Portfolio of Bhuvann Vinodh Ram: data engineering, data analysis and AI engineering projects with live demos, plus downloadable CVs.">
+<link rel="stylesheet" href="assets/chat.css">
 <style>
 :root{--bg:#f7f8fa;--card:#fff;--ink:#16202c;--muted:#566273;--line:#dfe4ea;--accent:#0b6e75;--accent-soft:#e3f2f3;--max:980px}
 @media (prefers-color-scheme:dark){:root{--bg:#0f1418;--card:#171e24;--ink:#e8edf2;--muted:#9aa7b4;--line:#27313a;--accent:#5fc6cc;--accent-soft:#16303a}}
@@ -44,7 +45,21 @@ h3{font-size:1.05rem;margin:0 0 4px}
 .skills p{margin:4px 0 0;color:var(--muted);font-size:.95rem}
 ul.plain{margin:0;padding-left:20px;color:var(--muted)}
 ul.plain li{margin:6px 0}
-footer{padding:32px 0 48px;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}
+.chip{border:1px solid var(--line);background:var(--card);color:var(--muted);border-radius:999px;padding:5px 14px;font:inherit;font-size:.88rem;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.card .links{display:flex;gap:14px;flex-wrap:wrap;font-weight:600;font-size:.93rem}
+.card.new{border-color:var(--accent)}
+.badge{display:inline-block;background:var(--accent);color:var(--bg);border-radius:6px;font-size:.7rem;font-weight:700;padding:1px 7px;margin-left:6px;vertical-align:middle;letter-spacing:.04em}
+.cvgrid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.cvcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:8px}
+.cvcard p{margin:0;color:var(--muted);font-size:.92rem;flex:1}
+.cvcard .btn{text-align:center}
+.cvcard small a{color:var(--muted)}
+.spot{outline:3px solid var(--accent);outline-offset:6px;border-radius:12px;transition:outline-color .6s}
+[hidden]{display:none!important}
+.chat-root{--chat-bg:var(--card);--chat-accent-ink:var(--bg)}
+footer{padding:32px 0 96px;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
 @media (max-width:640px){.item{grid-template-columns:1fr}.hero{padding:48px 0 32px}nav a{margin-left:12px}}
 </style>
 </head>
@@ -54,6 +69,7 @@ footer{padding:32px 0 48px;border-top:1px solid var(--line);color:var(--muted);f
     <a class="brand" href="#top">Bhuvann Vinodh Ram</a>
     <nav aria-label="Sections">
       <a href="#projects">Projects</a>
+      <a href="#cv">CV</a>
       <a href="#experience">Experience</a>
       <a href="#skills">Skills</a>
       <a href="#education">Education</a>
@@ -64,11 +80,13 @@ footer{padding:32px 0 48px;border-top:1px solid var(--line);color:var(--muted);f
 
 <main id="top" class="wrap">
   <div class="hero">
-    <div class="eyebrow">AI in Medicine &middot; Dublin, Ireland</div>
-    <h1>Machine learning for medical data.</h1>
-    <p class="lead">I'm Bhuvann, a graduate of the MSc in Artificial Intelligence for Medicine and Medical Research at University College Dublin. I build deep learning and explainable AI models for genomics, medical imaging and clinical data, and I currently work in trust and safety at Accenture.</p>
+    <div class="eyebrow">Data and AI &middot; Dublin, Ireland</div>
+    <h1>Data pipelines, analysis and machine learning you can try.</h1>
+    <p class="lead">I'm Bhuvann, a graduate of the MSc in Artificial Intelligence for Medicine and Medical Research at University College Dublin. I build data pipelines, dashboards and machine learning models, and I publish them with tests, automation and live demos. I currently work in trust and safety at Accenture.</p>
     <div class="btns">
       <a class="btn primary" href="#projects">View projects</a>
+      <a class="btn" href="#cv">Download CV</a>
+      <button class="btn" type="button" id="tour-start">Take the guided tour</button>
       <a class="btn" href="https://github.com/bhuvannv13">GitHub</a>
       <a class="btn" href="https://www.linkedin.com/in/bhuvann-vinodh-ram-5545b3210/">LinkedIn</a>
     </div>
@@ -76,61 +94,90 @@ footer{padding:32px 0 48px;border-top:1px solid var(--line);color:var(--muted);f
 
   <section id="projects">
     <h2>Selected projects</h2>
+    <div class="chips" role="group" aria-label="Filter projects by role">
+      <button class="chip" type="button" data-filter="all" aria-pressed="true">All</button>
+      <button class="chip" type="button" data-filter="de" aria-pressed="false">Data engineering</button>
+      <button class="chip" type="button" data-filter="da" aria-pressed="false">Data analysis</button>
+      <button class="chip" type="button" data-filter="ai" aria-pressed="false">AI engineering</button>
+    </div>
     <div class="grid">
-      <article class="card">
-        <h3>Multi-omics subtyping of colon adenocarcinoma</h3>
-        <p>Integrated RNA-seq, copy-number and DNA methylation data from TCGA with a variational autoencoder, then clustered the latent space and tested the subtypes with Kaplan-Meier survival analysis, SHAP and STRING networks.</p>
-        <ul class="tags"><li>VAE</li><li>Multi-omics</li><li>SHAP</li><li>Survival analysis</li></ul>
-        <a href="https://github.com/bhuvannv13/Integrative-Multi-Omics-Subtyping-of-Colon-Adenocarcinoma-Using-Deep-Learning-and-Explainable-AI">View repository</a>
+      <article class="card new" id="p-conflict" data-roles="de da ai">
+        <h3>Conflict Risk Monitor <span class="badge">NEW</span></h3>
+        <p>A monthly pipeline that pulls UCDP conflict-event data and World Bank indicators, builds a 176-country panel, compares three models on a time-based split, and publishes a dashboard with an in-browser chat assistant. Refreshes itself on GitHub Actions.</p>
+        <ul class="tags"><li>ETL</li><li>scikit-learn</li><li>GitHub Actions</li><li>Dashboard</li></ul>
+        <div class="links"><a href="https://bhuvannv13.github.io/conflict-risk-monitor/">Live demo</a><a href="https://github.com/bhuvannv13/conflict-risk-monitor">Code</a></div>
       </article>
-      <article class="card">
-        <h3>Emotion classification from tweets</h3>
-        <p>A dual-input BiLSTM that combines word embeddings with a sentiment polarity score to classify emotion in text. It reaches 90.63% test accuracy and runs as a Gradio web app.</p>
-        <ul class="tags"><li>NLP</li><li>BiLSTM</li><li>TensorFlow</li><li>Gradio</li></ul>
-        <a href="https://github.com/bhuvannv13/Twitter-Emotional-Classification">View repository</a>
+      <article class="card new" id="p-tamil" data-roles="ai de">
+        <h3>Tamil Thedal (தமிழ் தேடல்) <span class="badge">NEW</span></h3>
+        <p>A search engine for 1,549 Tamil verses (Thirukkural, Aathichudi, Puthiya Aathichudi) by theme, author and category, with grammar lessons, a history timeline, an OpenCV.js inscription reader and a free chat helper. Runs entirely in the browser.</p>
+        <ul class="tags"><li>Search</li><li>OpenCV.js</li><li>NLP</li><li>Python ETL</li></ul>
+        <div class="links"><a href="https://bhuvannv13.github.io/tamil-thedal/">Live demo</a><a href="https://github.com/bhuvannv13/tamil-thedal">Code</a></div>
       </article>
-      <article class="card">
+      <article class="card" id="p-hgsoc" data-roles="ai da">
         <h3>Ovarian cancer survival (HGSOC)</h3>
-        <p>XGBoost models on TCGA clinical and mutation data for high-grade serous ovarian cancer, with SHAP used to explain which clinical and genomic features drive each prediction.</p>
-        <ul class="tags"><li>XGBoost</li><li>SHAP</li><li>TCGA</li></ul>
-        <a href="https://github.com/bhuvannv13/HGSOC-survival">View repository</a>
+        <p>XGBoost on TCGA clinical and mutation data with SHAP explanations. I found follow-up variables that leaked the outcome, removed them and reran the notebook end to end in GitHub Actions: 0.78 test accuracy, 0.91 ROC AUC.</p>
+        <ul class="tags"><li>XGBoost</li><li>SHAP</li><li>Leakage checks</li></ul>
+        <div class="links"><a href="https://github.com/bhuvannv13/HGSOC-survival">Code</a></div>
       </article>
-      <article class="card">
-        <h3>Brain tumour classification from MRI</h3>
-        <p>Convolutional networks and ResNet50 transfer learning for detecting and classifying brain tumours, with OpenCV preprocessing filters and a Streamlit demo app.</p>
-        <ul class="tags"><li>CNN</li><li>Medical imaging</li><li>Streamlit</li></ul>
-        <a href="https://github.com/bhuvannv13/Brain_Tumour_classification_api">View repository</a>
-      </article>
-      <article class="card">
-        <h3>RNA-seq analysis of HER2 in breast cancer</h3>
-        <p>Differential expression, pathway enrichment and survival modelling in R to study how HER2 amplification changes gene expression and patient outcomes.</p>
-        <ul class="tags"><li>R</li><li>RNA-seq</li><li>Pathway enrichment</li></ul>
-        <a href="https://github.com/bhuvannv13/RNASeqinBC">View repository</a>
-      </article>
-      <article class="card">
+      <article class="card" id="p-ecg" data-roles="ai">
         <h3>ECG heartbeat classification</h3>
-        <p>A 1D convolutional network that classifies heartbeats from the MIT-BIH Arrhythmia dataset into five beat types, with class balancing and exploratory analysis.</p>
-        <ul class="tags"><li>1D CNN</li><li>ECG</li><li>Keras</li></ul>
-        <a href="https://github.com/bhuvannv13/ECG_Classification_CNN">View repository</a>
+        <p>A 1D convolutional network that classifies MIT-BIH heartbeats into five beat types: 96.01% accuracy on 21,892 held-out beats, reproduced by an automated rerun.</p>
+        <ul class="tags"><li>1D CNN</li><li>Keras</li><li>Reproducible</li></ul>
+        <div class="links"><a href="https://github.com/bhuvannv13/ECG_Classification_CNN">Code</a></div>
       </article>
-      <article class="card">
-        <h3>Handwritten prescription reader</h3>
-        <p>Object detection with Detectron2 to find handwritten medicine names in prescription images, trained on a custom annotated dataset during an internship project.</p>
-        <ul class="tags"><li>Detectron2</li><li>Object detection</li></ul>
-        <a href="https://github.com/bhuvannv13/Prescription-Reader">View repository</a>
+      <article class="card" id="p-twitter" data-roles="ai">
+        <h3>Emotion classification from tweets</h3>
+        <p>A dual-input BiLSTM that combines word embeddings with a sentiment polarity score: 90.63% test accuracy, served as a Gradio web app.</p>
+        <ul class="tags"><li>NLP</li><li>BiLSTM</li><li>Gradio</li></ul>
+        <div class="links"><a href="https://github.com/bhuvannv13/Twitter-Emotional-Classification">Code</a></div>
       </article>
-      <article class="card">
+      <article class="card" id="p-brain" data-roles="ai">
+        <h3>Brain tumour classification from MRI</h3>
+        <p>A four-class CNN (0.80 accuracy, 0.77 macro F1 on 2,258 test images) and ResNet50 transfer learning, deployed as a Streamlit app with unit tests and CI.</p>
+        <ul class="tags"><li>CNN</li><li>Streamlit</li><li>pytest</li></ul>
+        <div class="links"><a href="https://github.com/bhuvannv13/Brain_Tumour_classification_api">Code</a></div>
+      </article>
+      <article class="card" id="p-omics" data-roles="ai da">
+        <h3>Multi-omics subtyping of colon adenocarcinoma</h3>
+        <p>Integrated RNA-seq, copy-number and methylation data from TCGA with a variational autoencoder, clustered the latent space and tested the subtypes with survival analysis, SHAP and STRING networks.</p>
+        <ul class="tags"><li>VAE</li><li>Multi-omics</li><li>Survival analysis</li></ul>
+        <div class="links"><a href="https://github.com/bhuvannv13/Integrative-Multi-Omics-Subtyping-of-Colon-Adenocarcinoma-Using-Deep-Learning-and-Explainable-AI">Code</a></div>
+      </article>
+      <article class="card" id="p-retail" data-roles="da de">
+        <h3>Retail sales register analysis</h3>
+        <p>Scraped multi-page sales records with Beautiful Soup, cleaned them, and explored customer behaviour, payment methods and profit trends across locations and time.</p>
+        <ul class="tags"><li>Web scraping</li><li>pandas</li><li>EDA</li></ul>
+        <div class="links"><a href="https://github.com/bhuvannv13/RetailSalesRegister_Data_Analysis">Code</a></div>
+      </article>
+      <article class="card" id="p-vle" data-roles="da">
         <h3>Student engagement analysis (VLE)</h3>
         <p>Voting ensembles of random forest, logistic regression, gradient boosting and SVM models on virtual learning environment data, compared across feature-selection settings.</p>
-        <ul class="tags"><li>scikit-learn</li><li>Ensembles</li><li>Feature selection</li></ul>
-        <a href="https://github.com/bhuvannv13/VLE-Data-Analysis-Python">View repository</a>
+        <ul class="tags"><li>scikit-learn</li><li>Ensembles</li></ul>
+        <div class="links"><a href="https://github.com/bhuvannv13/VLE-Data-Analysis-Python">Code</a></div>
       </article>
-      <article class="card">
-        <h3>Retail sales register analysis</h3>
-        <p>Scraped sales records with Beautiful Soup, cleaned them, and explored customer behaviour, payment methods and profit trends across locations and time.</p>
-        <ul class="tags"><li>Web scraping</li><li>pandas</li><li>EDA</li></ul>
-        <a href="https://github.com/bhuvannv13/RetailSalesRegister_Data_Analysis">View repository</a>
+      <article class="card" id="p-rnaseq" data-roles="da">
+        <h3>RNA-seq analysis of HER2 in breast cancer</h3>
+        <p>Differential expression, pathway enrichment and survival modelling in R to study how HER2 amplification changes gene expression and patient outcomes.</p>
+        <ul class="tags"><li>R</li><li>DESeq2</li><li>Enrichment</li></ul>
+        <div class="links"><a href="https://github.com/bhuvannv13/RNASeqinBC">Code</a></div>
       </article>
+      <article class="card" id="p-prescription" data-roles="ai">
+        <h3>Handwritten prescription reader</h3>
+        <p>Object detection with Detectron2 to find handwritten medicine names in prescription images, trained on a custom annotated dataset.</p>
+        <ul class="tags"><li>Detectron2</li><li>Object detection</li></ul>
+        <div class="links"><a href="https://github.com/bhuvannv13/Prescription-Reader">Code</a></div>
+      </article>
+    </div>
+  </section>
+
+  <section id="cv">
+    <h2>CV downloads</h2>
+    <p class="lead" style="font-size:1rem">One full CV and three versions focused on entry-level roles. All are generated from the same source, so they always agree.</p>
+    <div class="cvgrid">
+      <div class="cvcard"><h3>Full CV</h3><p>Everything: experience, all projects, skills and awards.</p><a class="btn primary" href="cv/Bhuvann_Vinodh_Ram_CV.pdf" download>Download PDF</a><small><a href="cv/Bhuvann_Vinodh_Ram_CV.html">View in browser</a></small></div>
+      <div class="cvcard"><h3>Data Engineer</h3><p>Pipelines, APIs, automation, Docker and CI.</p><a class="btn primary" href="cv/Bhuvann_Vinodh_Ram_CV_Data_Engineer.pdf" download>Download PDF</a><small><a href="cv/Bhuvann_Vinodh_Ram_CV_Data_Engineer.html">View in browser</a></small></div>
+      <div class="cvcard"><h3>Data Analyst</h3><p>Cleaning, statistics, dashboards and reporting.</p><a class="btn primary" href="cv/Bhuvann_Vinodh_Ram_CV_Data_Analyst.pdf" download>Download PDF</a><small><a href="cv/Bhuvann_Vinodh_Ram_CV_Data_Analyst.html">View in browser</a></small></div>
+      <div class="cvcard"><h3>AI Engineer</h3><p>Model building, evaluation, explainability and deployment.</p><a class="btn primary" href="cv/Bhuvann_Vinodh_Ram_CV_AI_Engineer.pdf" download>Download PDF</a><small><a href="cv/Bhuvann_Vinodh_Ram_CV_AI_Engineer.html">View in browser</a></small></div>
     </div>
   </section>
 
@@ -181,12 +228,13 @@ footer{padding:32px 0 48px;border-top:1px solid var(--line);color:var(--muted);f
   <section id="skills">
     <h2>Skills</h2>
     <div class="skills">
-      <div><h3>Languages</h3><p>Python, R, SQL, MATLAB</p></div>
+      <div><h3>Languages</h3><p>Python, R, SQL, JavaScript, MATLAB</p></div>
       <div><h3>Machine learning</h3><p>scikit-learn, XGBoost, feature engineering, hyperparameter tuning, ensembles</p></div>
       <div><h3>Deep learning</h3><p>TensorFlow, PyTorch, CNNs, BiLSTM, VAEs, U-Net</p></div>
       <div><h3>Computer vision</h3><p>OpenCV, Detectron2, classification, segmentation, object detection</p></div>
       <div><h3>Explainable AI</h3><p>SHAP, model interpretability</p></div>
-      <div><h3>Data and tools</h3><p>pandas, NumPy, Tableau, Git, Docker, Jupyter, Gradio</p></div>
+      <div><h3>Data engineering</h3><p>ETL with pandas, REST APIs, web scraping, GitHub Actions, GitLab CI/CD, Docker, pytest</p></div>
+      <div><h3>Data and tools</h3><p>SQL, Tableau, Plotly, Git, Jupyter, Streamlit, Gradio, OpenCV.js</p></div>
     </div>
   </section>
 
@@ -211,6 +259,7 @@ footer{padding:32px 0 48px;border-top:1px solid var(--line);color:var(--muted);f
       <li>UCD Innovation Challenge 2024: Innovation Spark Award</li>
       <li>NASA Space Apps Challenge 2024: built a climate storytelling website with a team</li>
       <li>UCD Advantage Award</li>
+      <li>First place, Tamil poetry competition (Agal Tamil Club)</li>
     </ul>
   </section>
 
@@ -220,6 +269,7 @@ footer{padding:32px 0 48px;border-top:1px solid var(--line);color:var(--muted);f
     <div class="btns">
       <a class="btn primary" href="https://www.linkedin.com/in/bhuvann-vinodh-ram-5545b3210/">Message me on LinkedIn</a>
       <a class="btn" href="https://github.com/bhuvannv13">See my code on GitHub</a>
+      <a class="btn" href="#cv">Download my CV</a>
     </div>
   </section>
 </main>
@@ -228,5 +278,7 @@ footer{padding:32px 0 48px;border-top:1px solid var(--line);color:var(--muted);f
   <div class="wrap">&copy; <span id="y">2026</span> Bhuvann Vinodh Ram</div>
 </footer>
 <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+<script src="assets/chat.js"></script>
+<script src="assets/guide.js"></script>
 </body>
 </html>
