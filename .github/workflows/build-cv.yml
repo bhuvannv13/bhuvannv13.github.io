@@ -1,0 +1,32 @@
+name: Build CVs
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "tools/build_cv.py"
+      - ".github/workflows/build-cv.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install playwright
+      - run: python -m playwright install --with-deps chromium
+      - name: Render HTML and PDF versions of every CV
+        run: python tools/build_cv.py --pdf
+      - name: Commit CVs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add cv
+          git commit -m "Rebuild CV PDFs" || echo "No changes"
+          git pull --rebase
+          git push
