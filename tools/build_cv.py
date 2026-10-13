@@ -1,6 +1,6 @@
 """Build the CVs from one source of truth.
 
-    python tools/build_cv.py          # writes cv/*.html
+    python tools/build_cv.py          # writes cv/*.html and cv/*.docx
     python tools/build_cv.py --pdf    # also renders cv/*.pdf with Playwright (Chromium)
 
 Every figure here comes from a repository README or a recorded run. Edit DATA and rebuild.
@@ -16,7 +16,7 @@ GH = "https://github.com/bhuvannv13/"
 PERSON = {
     "name": "Bhuvann Vinodh Ram",
     "location": "Dublin, Ireland",
-    "status": "Stamp 1G: full-time work authorisation in Ireland",
+    "status": "Stamp 1G holder: eligible to work full-time in Ireland without a work permit",
     "email": "bhuvannvinodhram@gmail.com",
     "links": [
         ("bhuvannv13.github.io", "https://bhuvannv13.github.io/"),
@@ -152,43 +152,59 @@ VARIANTS = {
     "Bhuvann_Vinodh_Ram_CV": {
         "label": "Full CV", "track": "all", "title": "Data and AI Graduate · MSc AI for Medicine (UCD)",
         "summary": "MSc graduate in Artificial Intelligence for Medicine from University College Dublin with hands-on experience across the data lifecycle: building pipelines from public data sources, analysing and visualising data, and training, explaining and deploying machine learning models for imaging, signals, text and genomics. Every project below has public code, and most have tests, CI and a live demo. Currently a Trust and Safety Associate at Accenture, Dublin.",
-        "projects": ["conflict", "tamil", "hgsoc", "ecg", "twitter", "brain", "prescription", "vle", "retail", "rnaseq", "tableau", "teeth"],
+        "projects": ["conflict", "tamil", "hgsoc", "ecg", "brain"],
+        "other": ["twitter", "prescription", "vle", "retail", "rnaseq", "tableau", "teeth"],
         "awards": "all"},
     "Bhuvann_Vinodh_Ram_CV_Data_Engineer": {
         "label": "Data Engineer", "track": "de", "title": "Graduate Data Engineer",
         "summary": "MSc AI for Medicine graduate (UCD) who builds reproducible data pipelines: automated extraction from APIs and bulk files, cleaning and modelling in pandas, tests and CI in GitHub Actions, and scheduled refreshes that publish results to the web. Industry experience containerising applications with Docker and deploying them through GitLab CI/CD. Currently a Trust and Safety Associate at Accenture, Dublin.",
-        "projects": ["conflict", "tamil", "hgsoc", "retail"], "awards": "short"},
+        "projects": ["conflict", "tamil", "hgsoc", "retail", "brain"],
+        "other": ["ecg", "vle", "rnaseq", "tableau"], "awards": "all"},
     "Bhuvann_Vinodh_Ram_CV_Data_Analyst": {
         "label": "Data Analyst", "track": "da", "title": "Graduate Data Analyst",
         "summary": "MSc AI for Medicine graduate (UCD) who turns messy data into clear answers: scraping and cleaning data, statistical and survival analysis, and dashboards and reports written for non-technical readers. Python (pandas, seaborn), SQL, R and Tableau. Currently a Trust and Safety Associate at Accenture, Dublin, classifying content against detailed policy.",
-        "projects": ["conflict", "retail", "vle", "hgsoc", "tableau"], "awards": "short"},
+        "projects": ["conflict", "retail", "vle", "hgsoc", "tableau"],
+        "other": ["tamil", "rnaseq", "ecg", "twitter"], "awards": "all"},
     "Bhuvann_Vinodh_Ram_CV_AI_Engineer": {
         "label": "AI Engineer", "track": "ai", "title": "Graduate AI / Machine Learning Engineer",
         "summary": "MSc AI for Medicine graduate (UCD) who builds and ships machine learning: CNNs, BiLSTMs, VAEs and gradient boosting on imaging, signal, text and genomics data, with SHAP explanations, leakage checks, tests and CI. Deploys models as Streamlit and Gradio apps and in-browser tools that cost nothing to run. Currently a Trust and Safety Associate at Accenture, Dublin.",
-        "projects": ["tamil", "conflict", "ecg", "hgsoc", "twitter", "brain"], "awards": "short"},
+        "projects": ["tamil", "conflict", "ecg", "hgsoc", "twitter", "brain"],
+        "other": ["prescription", "omics", "teeth"], "awards": "all"},
 }
 
 CSS = """
-@page{size:A4;margin:12mm 14mm}
+@page{size:A4;margin:13mm 15mm 12mm}
 *{box-sizing:border-box}
-body{font-family:Inter,"Segoe UI",Arial,sans-serif;color:#16202c;font-size:9.4pt;line-height:1.36;margin:0}
-a{color:#0b6e75;text-decoration:none}
-h1{font-size:20pt;margin:0;letter-spacing:-.01em}
-.title{font-size:11pt;color:#0b6e75;font-weight:600;margin:2px 0 4px}
-.contact{color:#3c4856;font-size:8.8pt}
-.contact span+span::before{content:"  ·  ";color:#9aa7b4}
-h2{font-size:10.5pt;text-transform:uppercase;letter-spacing:.08em;color:#0b6e75;border-bottom:1px solid #cfd8de;padding-bottom:2px;margin:11px 0 5px}
-p{margin:0 0 4px}
-.row{display:flex;justify-content:space-between;gap:12px}
-.row b{font-weight:600}
-.row>span:last-child{white-space:nowrap}
-.muted{color:#566273}
-ul{margin:2px 0 6px;padding-left:15px}
-li{margin:1px 0}
-.item{margin-bottom:5px;break-inside:avoid}
-.skill{margin:0 0 2px}
-.skill b{font-weight:600}
-.tags{color:#566273;font-size:8.6pt}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{font-family:Inter,"Segoe UI",Arial,sans-serif;color:#1d2733;font-size:9.6pt;line-height:1.4;margin:0;font-feature-settings:"tnum" 1}
+@media screen{body{max-width:210mm;margin:24px auto;padding:13mm 15mm;background:#fff;box-shadow:0 2px 18px rgba(0,0,0,.12)}html{background:#eef1f4}}
+a{color:inherit;text-decoration:none}
+header{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;padding-bottom:8px;border-bottom:2.5pt solid #0b6e75;margin-bottom:2px}
+h1{font-size:23pt;line-height:1.05;margin:0;letter-spacing:-.02em;font-weight:700;color:#0f1b26}
+.title{font-size:11pt;color:#0b6e75;font-weight:600;margin-top:4px}
+.contact{text-align:right;font-size:8.6pt;color:#3c4856;line-height:1.5}
+.contact a{color:#0b6e75}
+.auth{font-size:8.4pt;color:#566273;margin-top:5px}
+h2{break-after:avoid;font-size:9.6pt;text-transform:uppercase;letter-spacing:.12em;color:#0b6e75;font-weight:700;margin:12px 0 5px;padding-bottom:3px;border-bottom:.6pt solid #c9d3da}
+p{margin:0 0 3px}
+.summary{color:#2a3540}
+.item{margin-bottom:7px;break-inside:avoid}
+.row{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.row .what{font-weight:700;color:#0f1b26}
+.row .when{white-space:nowrap;color:#3c4856;font-size:8.8pt;font-weight:600}
+.sub{display:flex;justify-content:space-between;gap:12px;color:#3c4856;font-style:italic;font-size:9pt}
+.sub span:last-child{font-style:normal;white-space:nowrap;font-size:8.6pt;color:#566273}
+.links{font-size:8.4pt;font-weight:600}
+.links a{color:#0b6e75}
+.tech{font-size:8.5pt;color:#566273;margin-top:1px}
+ul{margin:3px 0 0;padding-left:13px}
+li{margin:1.5px 0;padding-left:1px}
+li::marker{color:#0b6e75}
+.skills{display:grid;grid-template-columns:30mm 1fr;gap:2px 10px}
+.skills b{font-weight:700;color:#0f1b26}
+.other li{margin:1px 0}
+.other b{font-weight:600}
+.keep{break-inside:avoid}
 """
 
 
@@ -202,40 +218,171 @@ def bullets_for(entry, track):
         return b[track]
     if b.get("all"):
         return b["all"]
-    # Full CV: take the lead bullet from each role-specific list.
     return [items[0] for items in (b.get("de"), b.get("ai")) if items]
+
+
+def link_label(text, url):
+    return {"Live": "Live demo", "Code": "GitHub"}.get(text, text)
+
+
+def short(url):
+    return url.replace("https://", "").replace("www.", "").rstrip("/")
 
 
 def render(slug, variant):
     track = variant["track"]
-    out = [f"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>{esc(PERSON['name'])} – {esc(variant['label'])} CV</title>",
-           "<link href='https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap' rel='stylesheet'>",
-           f"<style>{CSS}</style></head><body>",
-           f"<h1>{esc(PERSON['name'])}</h1><div class='title'>{esc(variant['title'])}</div>",
-           "<div class='contact'>" + "".join(f"<span>{x}</span>" for x in [
-               esc(PERSON["location"]), f"<a href='mailto:{PERSON['email']}'>{esc(PERSON['email'])}</a>",
-               *[f"<a href='{u}'>{esc(t)}</a>" for t, u in PERSON["links"]]]) + "</div>",
-           f"<div class='contact'><span>{esc(PERSON['status'])}</span></div>",
-           f"<h2>Profile</h2><p>{esc(variant['summary'])}</p>",
-           "<h2>Skills</h2>" + "".join(f"<p class='skill'><b>{esc(k)}:</b> {esc(v)}</p>" for k, v in SKILLS[track]),
-           "<h2>Experience</h2>"]
-    for e in EXPERIENCE:
-        items = bullets_for(e, track)
-        out.append(f"<div class='item'><div class='row'><span><b>{esc(e['role'])}</b>, {esc(e['org'])} <span class='muted'>· {esc(e['where'])}</span></span><span class='muted'>{esc(e['when'])}</span></div>"
-                   + "<ul>" + "".join(f"<li>{esc(x)}</li>" for x in items) + "</ul></div>")
-    out.append("<h2>Projects</h2>")
-    for key in variant["projects"]:
-        p = PROJECTS[key]
-        links = " · ".join(f"<a href='{u}'>{esc(t)}: {esc(u.replace('https://', '').rstrip('/'))}</a>" for t, u in p["links"])
-        out.append(f"<div class='item'><div class='row'><span><b>{esc(p['name'])}</b> <span class='tags'>· {esc(p['tags'])}</span></span><span class='muted'>{esc(p['year'])}</span></div>"
-                   + (f"<div class='tags'>{links}</div>" if links else "")
-                   + "<ul>" + "".join(f"<li>{esc(x)}</li>" for x in bullets_for(p, track)) + "</ul></div>")
-    out.append("<h2>Education</h2>")
+    o = [f"<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'>",
+         f"<title>{esc(PERSON['name'])} – {esc(variant['label'])} CV</title>",
+         "<link href='https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap' rel='stylesheet'>",
+         f"<style>{CSS}</style></head><body>",
+         "<header><div>",
+         f"<h1>{esc(PERSON['name'])}</h1><div class='title'>{esc(variant['title'])}</div></div>",
+         "<div class='contact'>" + "<br>".join([
+             esc(PERSON["location"]),
+             f"<a href='mailto:{PERSON['email']}'>{esc(PERSON['email'])}</a>",
+             *[f"<a href='{u}'>{esc(short(u))}</a>" for _, u in PERSON["links"]]]) + "</div></header>",
+         f"<div class='auth'>{esc(PERSON['status'])}</div>",
+         f"<h2>Profile</h2><p class='summary'>{esc(variant['summary'])}</p>",
+         "<h2>Education</h2>"]
     for school, degree, when, grade in EDUCATION:
-        out.append(f"<div class='item'><div class='row'><span><b>{esc(degree)}</b>, {esc(school)}</span><span class='muted'>{esc(when)}</span></div><div class='muted'>{esc(grade)}</div></div>")
-    out.append("<h2>Awards</h2><ul>" + "".join(f"<li>{esc(a)}</li>" for a in AWARDS[variant["awards"]]) + "</ul>")
-    out.append("</body></html>")
-    return "\n".join(out)
+        o.append(f"<div class='item'><div class='row'><span class='what'>{esc(degree)}</span><span class='when'>{esc(when)}</span></div>"
+                 f"<div class='sub'><span>{esc(school)}</span><span>{esc(grade)}</span></div></div>")
+    o.append("<h2>Technical skills</h2><div class='skills'>" + "".join(f"<b>{esc(k)}</b><span>{esc(v)}</span>" for k, v in SKILLS[track]) + "</div>")
+    for i, e in enumerate(EXPERIENCE):
+        o.append(f"<div class='item'>{'<h2>Experience</h2>' if i == 0 else ''}<div class='row'><span class='what'>{esc(e['role'])}</span><span class='when'>{esc(e['when'])}</span></div>"
+                 f"<div class='sub'><span>{esc(e['org'])}</span><span>{esc(e['where'])}</span></div>"
+                 "<ul>" + "".join(f"<li>{esc(x)}</li>" for x in bullets_for(e, track)) + "</ul></div>")
+    for i, key in enumerate(variant["projects"]):
+        p = PROJECTS[key]
+        links = " · ".join(f"<a href='{u}'>{esc(link_label(t, u))}</a>" for t, u in p["links"])
+        o.append(f"<div class='item'>{'<h2>Projects</h2>' if i == 0 else ''}<div class='row'><span class='what'>{esc(p['name'])}</span><span class='when'>{esc(p['year'])}</span></div>"
+                 f"<div class='sub'><span>{esc(p['tags'])}</span><span class='links'>{links}</span></div>"
+                 "<ul>" + "".join(f"<li>{esc(x)}</li>" for x in bullets_for(p, track)) + "</ul></div>")
+    if variant.get("other"):
+        o.append("<div class='keep'><h2>Other projects</h2><ul class='other'>")
+        for key in variant["other"]:
+            p = PROJECTS[key]
+            name = f"<a href='{p['links'][0][1]}'>{esc(p['name'])}</a>" if p["links"] else esc(p["name"])
+            o.append(f"<li><b>{name}</b> ({esc(p['tags'])}, {esc(p['year'])}): {esc(bullets_for(p, track)[0])}</li>")
+        o.append("</ul></div>")
+    o.append("<div class='keep'><h2>Awards and activities</h2><ul class='awards'>" + "".join(f"<li>{esc(a)}</li>" for a in AWARDS[variant["awards"]]) + "</ul></div>")
+    o.append("</body></html>")
+    return "\n".join(o)
+
+
+def render_docx(slug, variant, path):
+    """Word version for recruiters and agencies that ask for .docx. Same content as the PDF."""
+    from docx import Document
+    from docx.enum.text import WD_TAB_ALIGNMENT
+    from docx.oxml import OxmlElement
+    from docx.oxml.ns import qn
+    from docx.shared import Mm, Pt, RGBColor
+
+    teal, ink, grey = RGBColor(0x0B, 0x6E, 0x75), RGBColor(0x1D, 0x27, 0x33), RGBColor(0x56, 0x62, 0x73)
+    track = variant["track"]
+    doc = Document()
+    sec = doc.sections[0]
+    sec.page_width, sec.page_height = Mm(210), Mm(297)
+    sec.left_margin = sec.right_margin = Mm(16)
+    sec.top_margin, sec.bottom_margin = Mm(14), Mm(13)
+    width = sec.page_width - sec.left_margin - sec.right_margin
+    normal = doc.styles["Normal"]
+    normal.font.name, normal.font.size, normal.font.color.rgb = "Calibri", Pt(10), ink
+    normal.element.rPr.rFonts.set(qn("w:eastAsia"), "Calibri")
+    normal.paragraph_format.space_after, normal.paragraph_format.line_spacing = Pt(0), 1.08
+
+    def para(space_before=0, space_after=0):
+        p = doc.add_paragraph()
+        p.paragraph_format.space_before, p.paragraph_format.space_after = Pt(space_before), Pt(space_after)
+        return p
+
+    def run(p, text, bold=False, italic=False, size=None, color=None):
+        r = p.add_run(text)
+        r.bold, r.italic = bold, italic
+        if size: r.font.size = Pt(size)
+        if color is not None: r.font.color.rgb = color
+        return r
+
+    def link(p, text, url, bold=False, size=None):
+        rel = p.part.relate_to(url, "http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink", is_external=True)
+        h = OxmlElement("w:hyperlink"); h.set(qn("r:id"), rel)
+        r = OxmlElement("w:r"); pr = OxmlElement("w:rPr")
+        c = OxmlElement("w:color"); c.set(qn("w:val"), "0B6E75"); pr.append(c)
+        if bold: pr.append(OxmlElement("w:b"))
+        if size:
+            sz = OxmlElement("w:sz"); sz.set(qn("w:val"), str(int(size * 2))); pr.append(sz)
+        r.append(pr); t = OxmlElement("w:t"); t.text = text; t.set(qn("xml:space"), "preserve"); r.append(t)
+        h.append(r); p._p.append(h)
+
+    def rule(p, color="0B6E75", sz=6):
+        pPr = p._p.get_or_add_pPr(); b = OxmlElement("w:pBdr"); bottom = OxmlElement("w:bottom")
+        for k, v in (("val", "single"), ("sz", str(sz)), ("space", "1"), ("color", color)):
+            bottom.set(qn("w:" + k), v)
+        b.append(bottom); pPr.append(b)
+
+    def right_tab(p):
+        p.paragraph_format.tab_stops.add_tab_stop(width, WD_TAB_ALIGNMENT.RIGHT)
+
+    def heading(text):
+        p = para(9, 3); run(p, text.upper(), bold=True, size=10, color=teal); rule(p, "C9D3DA", 4)
+        p.paragraph_format.keep_with_next = True
+
+    def bullet(text):
+        p = doc.add_paragraph(style="List Bullet")
+        p.paragraph_format.space_after, p.paragraph_format.left_indent = Pt(1), Mm(5)
+        run(p, text)
+
+    def row(left, right, sub_left="", sub_right="", sub_right_links=None):
+        p = para(4); right_tab(p); p.paragraph_format.keep_with_next = True
+        run(p, left, bold=True); run(p, "\t" + right, bold=True, size=9, color=grey)
+        if sub_left or sub_right or sub_right_links:
+            q = para(); right_tab(q); q.paragraph_format.keep_with_next = True
+            run(q, sub_left, italic=True, size=9.5, color=grey); run(q, "\t")
+            if sub_right_links:
+                for i, (t, u) in enumerate(sub_right_links):
+                    if i: run(q, "  ·  ", size=9, color=grey)
+                    link(q, t, u, bold=True, size=9)
+            else:
+                run(q, sub_right, size=9, color=grey)
+
+    p = para(); run(p, PERSON["name"], bold=True, size=22, color=RGBColor(0x0F, 0x1B, 0x26))
+    p = para(0, 2); run(p, variant["title"], bold=True, size=11.5, color=teal)
+    p = para(0, 1)
+    run(p, PERSON["location"] + "  ·  ", size=9.5, color=grey)
+    link(p, PERSON["email"], "mailto:" + PERSON["email"], size=9.5)
+    for _, u in PERSON["links"]:
+        run(p, "  ·  ", size=9.5, color=grey); link(p, short(u), u, size=9.5)
+    p = para(0, 2); run(p, PERSON["status"], size=9, color=grey); rule(p, "0B6E75", 12)
+
+    heading("Profile"); p = para(); run(p, variant["summary"])
+    heading("Education")
+    for school, degree, when, grade in EDUCATION:
+        row(degree, when, school, grade)
+    heading("Technical skills")
+    for k, v in SKILLS[track]:
+        p = para(0, 1); run(p, k + ": ", bold=True); run(p, v)
+    heading("Experience")
+    for e in EXPERIENCE:
+        row(e["role"], e["when"], e["org"], e["where"])
+        for b in bullets_for(e, track): bullet(b)
+    heading("Projects")
+    for key in variant["projects"]:
+        pr = PROJECTS[key]
+        row(pr["name"], pr["year"], pr["tags"], sub_right_links=[(link_label(t, u), u) for t, u in pr["links"]])
+        for b in bullets_for(pr, track): bullet(b)
+    if variant.get("other"):
+        heading("Other projects")
+        for key in variant["other"]:
+            pr = PROJECTS[key]
+            p = doc.add_paragraph(style="List Bullet"); p.paragraph_format.left_indent = Mm(5); p.paragraph_format.space_after = Pt(1)
+            if pr["links"]: link(p, pr["name"], pr["links"][0][1], bold=True)
+            else: run(p, pr["name"], bold=True)
+            run(p, f" ({pr['tags']}, {pr['year']}): {bullets_for(pr, track)[0]}")
+    heading("Awards and activities")
+    for a in AWARDS[variant["awards"]]: bullet(a)
+    doc.core_properties.author = PERSON["name"]
+    doc.core_properties.title = f"{PERSON['name']} – {variant['label']} CV"
+    doc.save(str(path))
 
 
 def main(argv=None):
@@ -247,6 +394,7 @@ def main(argv=None):
     for slug, variant in VARIANTS.items():
         path = OUT / f"{slug}.html"
         path.write_text(render(slug, variant), encoding="utf-8")
+        render_docx(slug, variant, path.with_suffix(".docx"))
         pages.append(path)
     if args.pdf:
         from playwright.sync_api import sync_playwright
@@ -256,6 +404,7 @@ def main(argv=None):
             for path in pages:
                 page.goto(path.resolve().as_uri(), wait_until="networkidle")
                 page.evaluate("document.fonts.ready")
+                page.emulate_media(media="print")
                 page.pdf(path=str(path.with_suffix(".pdf")), format="A4", print_background=True, prefer_css_page_size=True)
             browser.close()
     print("Built:", ", ".join(p.name for p in pages))
