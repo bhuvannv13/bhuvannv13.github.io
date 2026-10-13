@@ -18,6 +18,7 @@ PERSON = {
     "location": "Dublin, Ireland",
     "status": "Stamp 1G holder: eligible to work full-time in Ireland without a work permit",
     "email": "bhuvannvinodhram@gmail.com",
+    "phone": "+353 89 970 0459",
     "links": [
         ("bhuvannv13.github.io", "https://bhuvannv13.github.io/"),
         ("github.com/bhuvannv13", "https://github.com/bhuvannv13"),
@@ -239,6 +240,7 @@ def render(slug, variant):
          f"<h1>{esc(PERSON['name'])}</h1><div class='title'>{esc(variant['title'])}</div></div>",
          "<div class='contact'>" + "<br>".join([
              esc(PERSON["location"]),
+             f"<a href='tel:{PERSON['phone'].replace(' ', '')}'>{esc(PERSON['phone'])}</a>",
              f"<a href='mailto:{PERSON['email']}'>{esc(PERSON['email'])}</a>",
              *[f"<a href='{u}'>{esc(short(u))}</a>" for _, u in PERSON["links"]]]) + "</div></header>",
          f"<div class='auth'>{esc(PERSON['status'])}</div>",
@@ -348,7 +350,7 @@ def render_docx(slug, variant, path):
     p = para(); run(p, PERSON["name"], bold=True, size=22, color=RGBColor(0x0F, 0x1B, 0x26))
     p = para(0, 2); run(p, variant["title"], bold=True, size=11.5, color=teal)
     p = para(0, 1)
-    run(p, PERSON["location"] + "  ·  ", size=9.5, color=grey)
+    run(p, PERSON["location"] + "  ·  " + PERSON["phone"] + "  ·  ", size=9.5, color=grey)
     link(p, PERSON["email"], "mailto:" + PERSON["email"], size=9.5)
     for _, u in PERSON["links"]:
         run(p, "  ·  ", size=9.5, color=grey); link(p, short(u), u, size=9.5)
