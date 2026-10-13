@@ -18,9 +18,9 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: pip install playwright
+      - run: pip install playwright python-docx
       - run: python -m playwright install --with-deps chromium
-      - name: Render HTML and PDF versions of every CV
+      - name: Render HTML, PDF and Word versions of every CV
         run: python tools/build_cv.py --pdf
       - name: Commit CVs
         run: |
