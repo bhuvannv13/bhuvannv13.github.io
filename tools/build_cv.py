@@ -27,9 +27,15 @@ PERSON = {
 }
 
 EXPERIENCE = [
-    {"key": "accenture", "org": "Accenture", "role": "Trust and Safety Associate", "where": "Dublin, Ireland",
+    {"key": "accenture", "org": "Accenture", "role": "Trust and Safety Associate · Quality Expert Reviewer", "where": "Dublin, Ireland",
      "when": "Mar 2026 – Present",
-     "bullets": {"all": ["Evaluate, classify and moderate user-generated content against client platform policies to keep online communities safe and compliant."]}},
+     "bullets": {
+         "all": ["Quality Expert Reviewer: audit content moderation decisions for accuracy and consistency with client policy, and communicate findings and policy clarifications to client stakeholders.",
+                 "Monitor database activity and manage case records on enterprise review platforms, supporting database performance management, optimisation and tuning."],
+         "ts": ["Evaluate, classify and moderate user-generated content against client platform policies to keep online communities safe and compliant.",
+                "Quality Expert Reviewer: audit moderation decisions for accuracy and policy consistency, applying analytical thinking and careful decision making to borderline and sensitive cases.",
+                "Client-facing: communicate quality findings, trends and policy clarifications clearly to client stakeholders and the review team.",
+                "Monitor database activity and manage case records on enterprise review platforms, supporting database performance management, optimisation and tuning."]}},
     {"key": "ucd", "org": "University College Dublin", "role": "Research Intern", "where": "Dublin, Ireland",
      "when": "Apr 2025 – Sep 2025",
      "bullets": {
@@ -123,25 +129,34 @@ SKILLS = {
            ("Pipelines", "ETL with pandas and NumPy, REST APIs, bulk file ingestion, web scraping (Requests, Beautiful Soup), data validation"),
            ("Engineering", "Git, GitHub Actions (CI and scheduled jobs), GitLab CI/CD, Docker, pytest, Linux"),
            ("Data stores", "CSV and JSON, MySQL, MongoDB (basic)"),
-           ("Also", "scikit-learn, Tableau, Jupyter")],
+           ("Also", "scikit-learn, Tableau, Jupyter"),
+           ("Professional", "Content moderation, quality review, analytical thinking, decision making, client communication and client-facing work")],
     "da": [("Analysis", "Python (pandas, NumPy, SciPy), SQL, R; statistics, hypothesis testing, survival analysis (Kaplan–Meier, log-rank)"),
            ("Visualisation", "Tableau, matplotlib, seaborn, Plotly, interactive web dashboards"),
            ("Data preparation", "Cleaning, validation, web scraping (Requests, Beautiful Soup), feature engineering"),
            ("Modelling", "Regression, classification, clustering, ensembles, model evaluation"),
-           ("Tools", "Jupyter, Git, GitHub Actions")],
+           ("Tools", "Jupyter, Git, GitHub Actions"),
+           ("Professional", "Content moderation, quality review, analytical thinking, decision making, client communication and client-facing work")],
     "ai": [("Languages", "Python, SQL, JavaScript, R (basic)"),
            ("Machine learning", "scikit-learn, XGBoost, ensembles, hyperparameter tuning, leakage checks, time-based validation"),
            ("Deep learning", "TensorFlow/Keras, PyTorch; CNNs, BiLSTM, VAEs, U-Net; transfer learning (ResNet50, VGG16, EfficientNet, MobileNet)"),
            ("Vision and language", "OpenCV, OpenCV.js, Detectron2, Tesseract.js; text classification, embeddings, TF-IDF retrieval"),
            ("Explainability", "SHAP, model interpretation"),
-           ("Shipping models", "Streamlit, Gradio, GitHub Pages, Docker, GitHub Actions, pytest")],
+           ("Shipping models", "Streamlit, Gradio, GitHub Pages, Docker, GitHub Actions, pytest"),
+           ("Professional", "Content moderation, quality review, analytical thinking, decision making, client communication and client-facing work")],
     "all": [("Languages", "Python, SQL, R, MATLAB (basic), JavaScript, Bash"),
             ("Machine learning", "scikit-learn, XGBoost, TensorFlow/Keras, PyTorch; CNNs, BiLSTM, VAEs, U-Net; SHAP"),
             ("Data", "pandas, NumPy, SciPy, SQL data modelling (dbt-style layers, data-quality tests), ETL pipelines, REST APIs, web scraping"),
             ("Statistics", "A/B testing (SRM, CUPED, power and MDE, multiple-testing correction), hypothesis testing, survival analysis"),
             ("Vision", "OpenCV, OpenCV.js, Detectron2, Tesseract.js"),
             ("Visualisation", "Tableau, matplotlib, seaborn, Plotly"),
-            ("Engineering", "Git, GitHub Actions, GitLab CI/CD, Docker, pytest, Streamlit, Gradio, MySQL, MongoDB (basic)")],
+            ("Engineering", "Git, GitHub Actions, GitLab CI/CD, Docker, pytest, Streamlit, Gradio, MySQL, MongoDB (basic)"),
+            ("Professional", "Content moderation and quality review, analytical thinking, decision making, client communication, database activity monitoring and performance management")],
+    "ts": [("Trust and safety", "Content moderation, policy enforcement, quality review and auditing of moderation decisions, sensitive-content handling"),
+           ("Professional", "Analytical thinking, decision making, client communication, client-facing work, clear written reporting for non-technical readers"),
+           ("Data and databases", "Database management, database activity monitoring, database performance management, optimisation and tuning; SQL, Python (pandas), enterprise technologies"),
+           ("Analysis", "Statistics, A/B testing, trend and risk analysis, dashboards (Tableau, Plotly)"),
+           ("AI for content", "Text classification (BiLSTM, TF-IDF), sentiment and emotion models, model evaluation and explainability (SHAP)")],
 }
 
 EDUCATION = [
@@ -167,7 +182,7 @@ VARIANTS = {
         "label": "Full CV", "track": "all", "title": "Data and AI Graduate · MSc AI for Medicine (UCD)",
         "summary": "MSc AI for Medicine graduate (UCD) working across the data lifecycle: automated pipelines and SQL data modelling with data-quality tests; statistics, A/B testing and dashboards; and training, explaining and deploying machine learning for imaging, signals, text and genomics. Every project below has public code, most with tests, CI and a live demo. Currently a Trust and Safety Associate at Accenture, Dublin.",
         "projects": ["conflict", "checkout", "tamil", "hgsoc", "ecg"],
-        "other": ["brain", "twitter", "prescription", "vle", "retail", "rnaseq"],
+        "other": ["brain", "twitter", "prescription", "retail"],
         "awards": "full"},
     "Bhuvann_Vinodh_Ram_CV_Data_Engineer": {
         "label": "Data Engineer", "track": "de", "title": "Graduate Data Engineer",
@@ -184,6 +199,16 @@ VARIANTS = {
         "summary": "MSc AI for Medicine graduate (UCD) who builds and ships machine learning: CNNs, BiLSTMs, VAEs and gradient boosting on imaging, signal, text and genomics data, with SHAP explanations, leakage checks, tests and CI. Deploys models as Streamlit and Gradio apps and in-browser tools that cost nothing to run. Currently a Trust and Safety Associate at Accenture, Dublin.",
         "projects": ["tamil", "conflict", "ecg", "hgsoc", "twitter", "brain"],
         "other": ["prescription", "omics", "teeth"], "awards": "all"},
+    "Bhuvann_Vinodh_Ram_CV_Trust_Safety_Knowledge_Transfer": {
+        "label": "Trust & Safety (Knowledge Transfer)", "track": "ts", "title": "Trust and Safety Associate · Quality Expert Reviewer",
+        "summary": "Trust and Safety Associate and Quality Expert Reviewer at Accenture, Dublin, moderating user-generated content and auditing moderation decisions against client policy. Turns detailed policy and quality findings into clear guidance for clients and colleagues, backed by an MSc in AI for Medicine (UCD) and a habit of writing reports and documentation for non-technical readers. Analytical, consistent under volume, and comfortable with sensitive content.",
+        "projects": ["twitter", "conflict", "checkout", "tamil"],
+        "other": ["hgsoc", "ecg", "brain", "retail"], "awards": "all"},
+    "Bhuvann_Vinodh_Ram_CV_Trust_Safety_SME": {
+        "label": "Trust & Safety (PPO SME)", "track": "ts", "title": "Trust and Safety Associate · Quality Expert Reviewer",
+        "summary": "Trust and Safety Associate and Quality Expert Reviewer at Accenture, Dublin, with hands-on expertise in client platform policy: moderating user-generated content, auditing decisions for accuracy and consistency, and reviewing borderline cases. Client-facing, analytical and data-literate, with an MSc in AI for Medicine (UCD), SQL and Python skills, and experience building text-classification models that mirror how content is triaged at scale.",
+        "projects": ["twitter", "conflict", "checkout", "tamil"],
+        "other": ["hgsoc", "ecg", "brain", "retail"], "awards": "all"},
 }
 
 CSS = """
