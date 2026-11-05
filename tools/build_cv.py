@@ -404,11 +404,15 @@ def main(argv=None):
     parser = argparse.ArgumentParser()
     parser.add_argument("--pdf", action="store_true")
     parser.add_argument("--private", action="store_true", help="also build the role-focused CVs into private_cv/ (not published)")
+    parser.add_argument("--encrypt", action="store_true",
+                        help="encrypt the private CVs into cv/vault/ with the password in the CV_PASSWORD environment variable")
     args = parser.parse_args(argv)
+    if args.encrypt:
+        args.private = True
     OUT.mkdir(exist_ok=True)
     # Remove any previously published role-focused files so only the full CV is public.
     for stale in OUT.iterdir():
-        if stale.stem not in PUBLIC:
+        if stale.is_file() and stale.stem not in PUBLIC:
             stale.unlink()
     pages = []
     for slug, variant in VARIANTS.items():
@@ -435,6 +439,59 @@ def main(argv=None):
                 page.pdf(path=str(path.with_suffix(".pdf")), format="A4", print_background=True, prefer_css_page_size=True)
             browser.close()
     print("Built:", ", ".join(p.name for p in pages))
+    if args.encrypt:
+        encrypt_vault()
+
+
+VAULT = OUT / "vault"
+KDF_ITERATIONS = 600_000
+
+
+def encrypt_vault():
+    """Encrypt the private CVs with AES-256-GCM so only the owner's password can open them.
+
+    The key is derived from the CV_PASSWORD environment variable (a GitHub Actions secret) with
+    PBKDF2-SHA256. Only ciphertext is written to cv/vault/; the browser page me.html decrypts it.
+    """
+    import base64
+    import json
+    import os
+    import shutil
+    from cryptography.hazmat.primitives import hashes
+    from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+    from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
+
+    password = os.environ.get("CV_PASSWORD", "")
+    if len(password) < 12:
+        raise SystemExit("Set CV_PASSWORD (at least 12 characters) to build the encrypted vault.")
+    salt = os.urandom(16)
+    key = PBKDF2HMAC(algorithm=hashes.SHA256(), length=32, salt=salt, iterations=KDF_ITERATIONS).derive(password.encode("utf-8"))
+    aes = AESGCM(key)
+
+    def seal(data):
+        iv = os.urandom(12)
+        return iv + aes.encrypt(iv, data, None)
+
+    if VAULT.exists():
+        shutil.rmtree(VAULT)
+    VAULT.mkdir(parents=True)
+    files = []
+    for i, src in enumerate(sorted(PRIVATE_OUT.glob("*"))):
+        if src.suffix not in (".pdf", ".docx"):
+            continue
+        name = f"f{i}.bin"
+        (VAULT / name).write_bytes(seal(src.read_bytes()))
+        label = VARIANTS.get(src.stem, {}).get("label", src.stem)
+        files.append({"file": name, "name": src.name, "label": label, "type": src.suffix[1:]})
+    manifest = {
+        "v": 1, "kdf": "PBKDF2-SHA256", "iterations": KDF_ITERATIONS,
+        "salt": base64.b64encode(salt).decode(),
+        "check": base64.b64encode(seal(b"vault-ok")).decode(),
+        # The file list itself is encrypted too, so names and labels are not public.
+        "index": base64.b64encode(seal(json.dumps(files).encode())).decode(),
+    }
+    (VAULT / "manifest.json").write_text(json.dumps(manifest), encoding="utf-8")
+    print(f"Encrypted {len(files)} private files into {VAULT.relative_to(ROOT)}")
 
 
 if __name__ == "__main__":

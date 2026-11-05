@@ -18,10 +18,18 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: pip install playwright python-docx
+      - run: pip install playwright python-docx cryptography
       - run: python -m playwright install --with-deps chromium
-      - name: Render HTML, PDF and Word versions of every CV
-        run: python tools/build_cv.py --pdf
+      - name: Render the public CV, and the private CVs encrypted when the CV_PASSWORD secret is set
+        env:
+          CV_PASSWORD: ${{ secrets.CV_PASSWORD }}
+        run: |
+          if [ -n "$CV_PASSWORD" ]; then
+            python tools/build_cv.py --pdf --encrypt
+          else
+            echo "CV_PASSWORD secret not set: building the public CV only"
+            python tools/build_cv.py --pdf
+          fi
       - name: Commit CVs
         run: |
           git config user.name "github-actions[bot]"

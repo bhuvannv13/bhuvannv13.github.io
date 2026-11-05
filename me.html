@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Private CVs</title>
+<style>
+:root{--bg:#f6f8fa;--card:#fff;--ink:#132029;--muted:#566273;--line:#dde4ea;--accent:#0b6e75;--on-accent:#fff;--err:#b42318}
+@media (prefers-color-scheme:dark){:root{--bg:#0b1116;--card:#121b22;--ink:#e7edf2;--muted:#98a6b3;--line:#22303a;--accent:#5fd0d6;--on-accent:#06262a;--err:#ff8a80}}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:grid;place-items:center;background:var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:16px}
+.box{width:100%;max-width:440px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px;box-shadow:0 10px 30px rgba(0,0,0,.08)}
+h1{font-size:1.35rem;margin:0 0 6px}
+p{color:var(--muted);margin:0 0 18px;font-size:.95rem}
+label{display:block;font-weight:600;font-size:.9rem;margin-bottom:6px}
+input{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font:inherit}
+input:focus{outline:2px solid var(--accent);outline-offset:1px}
+button,.dl{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:12px;padding:11px 16px;border:0;border-radius:10px;background:var(--accent);color:var(--on-accent);font:600 .95rem Inter,system-ui,sans-serif;cursor:pointer;text-decoration:none}
+button[disabled]{opacity:.6;cursor:progress}
+.ghost{background:none;color:var(--muted);border:1px solid var(--line)}
+.msg{min-height:1.4em;margin-top:10px;font-size:.9rem;color:var(--err)}
+ul{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+li{display:flex;justify-content:space-between;align-items:center;gap:10px;border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+li span{min-width:0}
+li b{display:block}
+li small{color:var(--muted);overflow-wrap:anywhere;font-size:.8rem}
+li .dl{width:auto;flex:none;margin:0;padding:8px 14px}
+a.back{display:block;text-align:center;margin-top:16px;color:var(--muted);font-size:.88rem}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<main class="box">
+  <section id="login">
+    <h1>Private CVs</h1>
+    <p>Owner access. The files on this page are encrypted and can only be opened with the owner's password, inside this browser.</p>
+    <form id="form" autocomplete="off">
+      <label for="pw">Password</label>
+      <input id="pw" type="password" autocomplete="current-password" required>
+      <button id="go" type="submit">Unlock</button>
+      <div class="msg" id="msg" role="alert"></div>
+    </form>
+  </section>
+  <section id="files" hidden>
+    <h1>Your CVs</h1>
+    <p>Decrypted on this device only. Nothing is sent anywhere.</p>
+    <ul id="list"></ul>
+    <button class="ghost" id="lock" type="button">Lock</button>
+  </section>
+  <a class="back" href="./">← Back to the portfolio</a>
+</main>
+<script>
+(function () {
+  "use strict";
+  const $ = id => document.getElementById(id);
+  const b64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+  let key = null, manifest = null, urls = [];
+
+  async function open(blob) {
+    const iv = blob.slice(0, 12), data = blob.slice(12);
+    return new Uint8Array(await crypto.subtle.decrypt({ name: "AES-GCM", iv }, key, data));
+  }
+  async function deriveKey(password) {
+    const base = await crypto.subtle.importKey("raw", new TextEncoder().encode(password), "PBKDF2", false, ["deriveKey"]);
+    return crypto.subtle.deriveKey({ name: "PBKDF2", hash: "SHA-256", salt: b64(manifest.salt), iterations: manifest.iterations },
+      base, { name: "AES-GCM", length: 256 }, false, ["decrypt"]);
+  }
+
+  $("form").addEventListener("submit", async e => {
+    e.preventDefault();
+    const go = $("go"); go.disabled = true; go.textContent = "Unlocking…"; $("msg").textContent = "";
+    try {
+      if (!manifest) {
+        const r = await fetch("cv/vault/manifest.json", { cache: "no-store" });
+        if (!r.ok) throw new Error("setup");
+        manifest = await r.json();
+      }
+      key = await deriveKey($("pw").value);
+      const ok = new TextDecoder().decode(await open(b64(manifest.check)));
+      if (ok !== "vault-ok") throw new Error("bad");
+      const files = JSON.parse(new TextDecoder().decode(await open(b64(manifest.index))));
+      $("pw").value = "";
+      $("list").innerHTML = "";
+      for (const f of files) {
+        const li = document.createElement("li");
+        li.innerHTML = `<span><b></b><small></small></span><button class="dl" type="button">Download</button>`;
+        li.querySelector("b").textContent = f.label + " CV";
+        li.querySelector("small").textContent = f.type.toUpperCase() + " · " + f.name;
+        li.querySelector("button").addEventListener("click", async ev => {
+          const btn = ev.currentTarget; btn.disabled = true;
+          try {
+            const r = await fetch("cv/vault/" + f.file, { cache: "no-store" });
+            const plain = await open(new Uint8Array(await r.arrayBuffer()));
+            const type = f.type === "pdf" ? "application/pdf" : "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+            const url = URL.createObjectURL(new Blob([plain], { type })); urls.push(url);
+            const a = document.createElement("a"); a.href = url; a.download = f.name; document.body.appendChild(a); a.click(); a.remove();
+          } finally { btn.disabled = false; }
+        });
+        $("list").appendChild(li);
+      }
+      $("login").hidden = true; $("files").hidden = false;
+    } catch (err) {
+      key = null;
+      $("msg").textContent = err.message === "setup"
+        ? "The private CVs have not been set up yet (no vault found)."
+        : "That password didn't work.";
+    } finally { go.disabled = false; go.textContent = "Unlock"; }
+  });
+
+  $("lock").addEventListener("click", () => {
+    key = null; urls.forEach(u => URL.revokeObjectURL(u)); urls = [];
+    $("list").innerHTML = ""; $("files").hidden = true; $("login").hidden = false; $("pw").focus();
+  });
+})();
+</script>
+</body>
+</html>
