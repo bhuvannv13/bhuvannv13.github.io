@@ -70,6 +70,11 @@ PROJECTS = {
                             "Compared a persistence baseline, logistic regression and gradient boosting on a time-based split; on 2022–26 test data the chosen model reached ROC AUC 0.989 against 0.981 for the baseline."],
                      "ai": ["Estimates the probability of 25+ battle deaths per country in the next three months; gradient boosting chosen on a validation period scored ROC AUC 0.989 and average precision 0.959 on unseen 2022–26 data.",
                             "In-browser chat assistant (TF-IDF retrieval, no paid API) answers questions from the published data."]}},
+    "checkout": {"name": "Checkout redesign A/B test (SQL data modelling and experiment analysis)", "year": "2026",
+                 "links": [("Code", GH + "checkout-experiment-analytics")],
+                 "tags": "SQL · dbt-style models · Python · statistics · GitHub Actions",
+                 "bullets": {"all": ["Modelled messy raw event exports (simulated, 200,000 users) in nine SQL models across staging, intermediate and mart layers, with dbt-style data-quality tests.",
+                                     "Experiment readout with SRM check, z-test, Welch t-test, bootstrap CI, CUPED, Holm correction and power/MDE: +5.2% relative conversion lift (p = 0.016)."]}},
     "tamil": {"name": "Tamil Thedal (தமிழ் தேடல்)", "year": "2026",
               "links": [("Live", "https://bhuvannv13.github.io/tamil-thedal/"), ("Code", GH + "tamil-thedal")],
               "tags": "JavaScript · OpenCV.js · Tesseract.js · Python ETL",
@@ -132,7 +137,8 @@ SKILLS = {
            ("Shipping models", "Streamlit, Gradio, GitHub Pages, Docker, GitHub Actions, pytest")],
     "all": [("Languages", "Python, SQL, R, MATLAB (basic), JavaScript, Bash"),
             ("Machine learning", "scikit-learn, XGBoost, TensorFlow/Keras, PyTorch; CNNs, BiLSTM, VAEs, U-Net; SHAP"),
-            ("Data", "pandas, NumPy, SciPy, ETL pipelines, REST APIs, web scraping, statistics, survival analysis"),
+            ("Data", "pandas, NumPy, SciPy, SQL data modelling (dbt-style layers, data-quality tests), ETL pipelines, REST APIs, web scraping"),
+            ("Statistics", "A/B testing (SRM, CUPED, power and MDE, multiple-testing correction), hypothesis testing, survival analysis"),
             ("Vision", "OpenCV, OpenCV.js, Detectron2, Tesseract.js"),
             ("Visualisation", "Tableau, matplotlib, seaborn, Plotly"),
             ("Engineering", "Git, GitHub Actions, GitLab CI/CD, Docker, pytest, Streamlit, Gradio, MySQL, MongoDB (basic)")],
@@ -145,17 +151,24 @@ EDUCATION = [
 
 AWARDS = {
     "short": ["UCD Innovation Challenge 2024: Innovation Spark Award", "NASA Space Apps Challenge 2024 participant", "UCD Advantage Award"],
+    "full": ["UCD Innovation Challenge 2024: Innovation Spark Award", "NASA Space Apps Challenge 2024: built a climate storytelling website with a team",
+             "UCD Advantage Award", "First place, Tamil poetry competition (Agal Tamil Club)"],
     "all": ["UCD Innovation Challenge 2024: Innovation Spark Award", "NASA Space Apps Challenge 2024: built a climate storytelling website with a team",
             "UCD Advantage Award", "First place, Tamil poetry competition (Agal Tamil Club)", "Second place, Palaestra intramural volleyball tournament"],
 }
 
+# Only the full CV is published on the website. The role-focused versions are built with
+# --private into private_cv/ (git-ignored), so they stay on the owner's machine.
+PUBLIC = ["Bhuvann_Vinodh_Ram_CV"]
+PRIVATE_OUT = ROOT / "private_cv"
+
 VARIANTS = {
     "Bhuvann_Vinodh_Ram_CV": {
         "label": "Full CV", "track": "all", "title": "Data and AI Graduate · MSc AI for Medicine (UCD)",
-        "summary": "MSc graduate in Artificial Intelligence for Medicine from University College Dublin with hands-on experience across the data lifecycle: building pipelines from public data sources, analysing and visualising data, and training, explaining and deploying machine learning models for imaging, signals, text and genomics. Every project below has public code, and most have tests, CI and a live demo. Currently a Trust and Safety Associate at Accenture, Dublin.",
-        "projects": ["conflict", "tamil", "hgsoc", "ecg", "brain"],
-        "other": ["twitter", "prescription", "vle", "retail", "rnaseq", "tableau", "teeth"],
-        "awards": "all"},
+        "summary": "MSc AI for Medicine graduate (UCD) working across the data lifecycle: automated pipelines and SQL data modelling with data-quality tests; statistics, A/B testing and dashboards; and training, explaining and deploying machine learning for imaging, signals, text and genomics. Every project below has public code, most with tests, CI and a live demo. Currently a Trust and Safety Associate at Accenture, Dublin.",
+        "projects": ["conflict", "checkout", "tamil", "hgsoc", "ecg"],
+        "other": ["brain", "twitter", "prescription", "vle", "retail", "rnaseq"],
+        "awards": "full"},
     "Bhuvann_Vinodh_Ram_CV_Data_Engineer": {
         "label": "Data Engineer", "track": "de", "title": "Graduate Data Engineer",
         "summary": "MSc AI for Medicine graduate (UCD) who builds reproducible data pipelines: automated extraction from APIs and bulk files, cleaning and modelling in pandas, tests and CI in GitHub Actions, and scheduled refreshes that publish results to the web. Industry experience containerising applications with Docker and deploying them through GitLab CI/CD. Currently a Trust and Safety Associate at Accenture, Dublin.",
@@ -203,7 +216,7 @@ li{margin:1.5px 0;padding-left:1px}
 li::marker{color:#0b6e75}
 .skills{display:grid;grid-template-columns:30mm 1fr;gap:2px 10px}
 .skills b{font-weight:700;color:#0f1b26}
-.other li{margin:1px 0}
+.other li{margin:1px 0;break-inside:avoid}
 .other b{font-weight:600}
 .keep{break-inside:avoid}
 """
@@ -261,13 +274,13 @@ def render(slug, variant):
                  f"<div class='sub'><span>{esc(p['tags'])}</span><span class='links'>{links}</span></div>"
                  "<ul>" + "".join(f"<li>{esc(x)}</li>" for x in bullets_for(p, track)) + "</ul></div>")
     if variant.get("other"):
-        o.append("<div class='keep'><h2>Other projects</h2><ul class='other'>")
+        o.append("<div><h2>Other projects</h2><ul class='other'>")
         for key in variant["other"]:
             p = PROJECTS[key]
             name = f"<a href='{p['links'][0][1]}'>{esc(p['name'])}</a>" if p["links"] else esc(p["name"])
             o.append(f"<li><b>{name}</b> ({esc(p['tags'])}, {esc(p['year'])}): {esc(bullets_for(p, track)[0])}</li>")
         o.append("</ul></div>")
-    o.append("<div class='keep'><h2>Awards and activities</h2><ul class='awards'>" + "".join(f"<li>{esc(a)}</li>" for a in AWARDS[variant["awards"]]) + "</ul></div>")
+    o.append("<div class='keep'><h2>Awards and activities</h2><p>" + " · ".join(esc(a) for a in AWARDS[variant["awards"]]) + "</p></div>")
     o.append("</body></html>")
     return "\n".join(o)
 
@@ -390,11 +403,23 @@ def render_docx(slug, variant, path):
 def main(argv=None):
     parser = argparse.ArgumentParser()
     parser.add_argument("--pdf", action="store_true")
+    parser.add_argument("--private", action="store_true", help="also build the role-focused CVs into private_cv/ (not published)")
     args = parser.parse_args(argv)
     OUT.mkdir(exist_ok=True)
+    # Remove any previously published role-focused files so only the full CV is public.
+    for stale in OUT.iterdir():
+        if stale.stem not in PUBLIC:
+            stale.unlink()
     pages = []
     for slug, variant in VARIANTS.items():
-        path = OUT / f"{slug}.html"
+        if slug in PUBLIC:
+            out = OUT
+        elif args.private:
+            out = PRIVATE_OUT
+            out.mkdir(exist_ok=True)
+        else:
+            continue
+        path = out / f"{slug}.html"
         path.write_text(render(slug, variant), encoding="utf-8")
         render_docx(slug, variant, path.with_suffix(".docx"))
         pages.append(path)

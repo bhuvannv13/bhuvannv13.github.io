@@ -52,11 +52,11 @@
   ];
 
   const ROLES = {
-    de: { name: "Data Engineer", file: "cv/Bhuvann_Vinodh_Ram_CV_Data_Engineer.pdf", projects: ["p-conflict", "p-checkout", "p-tamil", "p-hgsoc", "p-retail"],
+    de: { name: "Data Engineer", file: "cv/Bhuvann_Vinodh_Ram_CV.pdf", projects: ["p-conflict", "p-checkout", "p-tamil", "p-hgsoc", "p-retail"],
           pitch: "For data engineering, look at the Conflict Risk Monitor first: scheduled extraction from two public sources, a tested transformation step and automatic publishing. Before that, Bhuvann containerised apps with Docker and shipped them through GitLab CI/CD at Smartail." },
-    da: { name: "Data Analyst", file: "cv/Bhuvann_Vinodh_Ram_CV_Data_Analyst.pdf", projects: ["p-checkout", "p-conflict", "p-retail", "p-vle", "p-hgsoc"],
+    da: { name: "Data Analyst", file: "cv/Bhuvann_Vinodh_Ram_CV.pdf", projects: ["p-checkout", "p-conflict", "p-retail", "p-vle", "p-hgsoc"],
           pitch: "For data analysis, the Conflict Risk Monitor dashboard and the retail sales analysis are the best starting points, followed by the survival analysis work on cancer data." },
-    ai: { name: "AI Engineer", file: "cv/Bhuvann_Vinodh_Ram_CV_AI_Engineer.pdf", projects: ["p-tamil", "p-ecg", "p-hgsoc", "p-twitter", "p-brain"],
+    ai: { name: "AI Engineer", file: "cv/Bhuvann_Vinodh_Ram_CV.pdf", projects: ["p-tamil", "p-ecg", "p-hgsoc", "p-twitter", "p-brain"],
           pitch: "For AI engineering: Tamil Thedal (search, OpenCV.js and a chat helper), the ECG CNN at 96% test accuracy, and the HGSOC model where Bhuvann caught and fixed data leakage." },
   };
 
@@ -65,7 +65,7 @@
     { el: "#p-conflict", say: "First stop, the newest project: the Conflict Risk Monitor. It's a real data pipeline that refreshes itself every month and publishes a live dashboard." },
     { el: "#p-tamil", say: "Next, Tamil Thedal: search Tamil poetry by theme, author or category, learn grammar, and try the inscription reader. Everything runs in your browser for free." },
     { el: "#p-hgsoc", say: "This one shows careful science. Bhuvann found variables that leaked the answer, removed them and reported the honest, lower score." },
-    { el: "#cv", say: "Need a CV? Pick the full one, or a version for Data Engineer, Data Analyst or AI Engineer roles. They're all generated from the same source." },
+    { el: "#cv", say: "Need a CV? One two-page CV covers data engineering, data analysis and AI engineering, as a PDF or Word file." },
     { el: "#experience", say: "Experience: Trust and Safety Associate at Accenture in Dublin since March 2026, a research internship at UCD, and internships in India covering data pipelines, deep learning and Docker deployment." },
     { el: "#skills", say: "Skills, from Python and SQL to TensorFlow, PyTorch, OpenCV, Docker and GitHub Actions." },
     { el: "#contact", say: "Land ho! That's the tour. The quickest way to reach Bhuvann is LinkedIn. Ask me anything else, like \"Which projects suit a data analyst?\"" },
@@ -83,11 +83,11 @@
     { keys: "skills tools languages python sql tech stack technologies know",
       html: () => `<p>Python, SQL, R and JavaScript; pandas, scikit-learn, XGBoost, TensorFlow and PyTorch; OpenCV and Detectron2; Tableau and Plotly; Git, GitHub Actions, GitLab CI/CD, Docker and pytest.</p>` },
     { keys: "contact email reach hire linkedin message talk",
-      html: () => `<p>The best way is <a href="https://www.linkedin.com/in/bhuvann-vinodh-ram-5545b3210/">LinkedIn</a>. The email address is on each CV. Code is on <a href="https://github.com/bhuvannv13">GitHub</a>.</p>` },
+      html: () => `<p>The best way is <a href="https://www.linkedin.com/in/bhuvann-vinodh-ram-5545b3210/">LinkedIn</a>. The email address is on the CV. Code is on <a href="https://github.com/bhuvannv13">GitHub</a>.</p>` },
     { keys: "visa work permit stamp authorisation right to work ireland sponsor",
       html: () => `<p>Bhuvann holds a Stamp 1G, which allows full-time work in Ireland.</p>` },
     { keys: "cv resume download pdf",
-      html: () => `<p>Here you go:</p><ul>${Object.values(ROLES).map(r => `<li><a href="${r.file}" download>${r.name} CV (PDF)</a></li>`).join("")}<li><a href="cv/Bhuvann_Vinodh_Ram_CV.pdf" download>Full CV (PDF)</a></li></ul>` },
+      html: () => `<p>Here you go: one CV that covers data engineering, data analysis and AI engineering.</p><ul><li><a href="cv/Bhuvann_Vinodh_Ram_CV.pdf" download>CV (PDF)</a></li><li><a href="cv/Bhuvann_Vinodh_Ram_CV.docx" download>CV (Word)</a></li></ul>` },
     { keys: "awards achievements prizes hackathon nasa",
       html: () => `<p>UCD Innovation Challenge 2024 Innovation Spark Award, NASA Space Apps Challenge 2024, the UCD Advantage Award, and first place in a Tamil poetry competition.</p>` },
     { keys: "free cost api how do you work chatbot ai llm",
@@ -121,7 +121,7 @@
     spotlight(s.el);
     const last = step === TOUR.length - 1;
     return { html: `<p>${esc(s.say)}</p><p class="muted"><small>Stop ${step + 1} of ${TOUR.length}</small></p>`,
-             suggestions: last ? ["Which projects suit a data engineer?", "Download a CV", "Who is Bhuvann?"] : ["Next stop", "End the tour"] };
+             suggestions: last ? ["Which projects suit a data engineer?", "Download the CV", "Who is Bhuvann?"] : ["Next stop", "End the tour"] };
   }
 
   async function answer(text) {
@@ -132,7 +132,7 @@
     const role = /engineer/.test(t) && /data/.test(t) ? "de" : /analy/.test(t) ? "da" : /(ai|ml|machine learning) ?engineer|ai role|ml role/.test(t) ? "ai" : null;
     if (role) {
       const r = ROLES[role];
-      return { html: `<p>${esc(r.pitch)}</p><ul>${r.projects.map(id => PROJECTS.find(p => p.id === id)).map(p => `<li><a href="#${p.id}" data-spot="#${p.id}">${esc(p.name)}</a></li>`).join("")}</ul><p><a href="${r.file}" download>Download the ${r.name} CV</a></p>`,
+      return { html: `<p>${esc(r.pitch)}</p><ul>${r.projects.map(id => PROJECTS.find(p => p.id === id)).map(p => `<li><a href="#${p.id}" data-spot="#${p.id}">${esc(p.name)}</a></li>`).join("")}</ul><p><a href="${r.file}" download>Download my CV</a></p>`,
                suggestions: ["Tell me about the Conflict Risk Monitor", "Tell me about Tamil Thedal", "Contact"] };
     }
     const hits = index.search(text, 1);
@@ -149,7 +149,7 @@
       title: "Kadal · your guide", subtitle: "Answers from this portfolio · runs in your browser", launcherLabel: "Ask Kadal",
       avatar: AVATAR, placeholder: "Ask about a project, the CV, skills…",
       greeting: `<p>Ahoy, I'm Kadal! Want a quick tour of Bhuvann's work, or shall I point you to the projects for a particular role?</p>`,
-      suggestions: ["Take the tour", "Which projects suit a data engineer?", "Which projects suit a data analyst?", "Which projects suit an AI engineer?", "Download a CV"],
+      suggestions: ["Take the tour", "Which projects suit a data engineer?", "Which projects suit a data analyst?", "Which projects suit an AI engineer?", "Download the CV"],
       answer,
     });
     const start = document.getElementById("tour-start");
