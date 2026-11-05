@@ -5,69 +5,139 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Bhuvann Vinodh Ram | Data and AI</title>
 <meta name="description" content="Portfolio of Bhuvann Vinodh Ram: data engineering, data analysis and AI engineering projects with live demos, plus downloadable CVs.">
+<meta property="og:title" content="Bhuvann Vinodh Ram | Data and AI">
+<meta property="og:description" content="Data pipelines, analysis and machine learning you can try. MSc AI for Medicine (UCD), Dublin.">
+<meta name="theme-color" content="#0b6e75">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/chat.css">
 <style>
-:root{--bg:#f7f8fa;--card:#fff;--ink:#16202c;--muted:#566273;--line:#dfe4ea;--accent:#0b6e75;--accent-soft:#e3f2f3;--max:980px}
-@media (prefers-color-scheme:dark){:root{--bg:#0f1418;--card:#171e24;--ink:#e8edf2;--muted:#9aa7b4;--line:#27313a;--accent:#5fc6cc;--accent-soft:#16303a}}
+:root{--bg:#f6f8fa;--bg2:#eef3f5;--card:#ffffff;--ink:#132029;--muted:#566273;--line:#dde4ea;--accent:#0b6e75;--accent2:#6d4bd8;--accent-soft:#e1f1f2;--glow:rgba(11,110,117,.18);--shadow:0 1px 2px rgba(16,24,40,.05),0 8px 24px rgba(16,24,40,.06);--max:1080px;--r:16px;--on-accent:#ffffff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1116;--bg2:#0f1820;--card:#121b22;--ink:#e7edf2;--muted:#98a6b3;--line:#22303a;--accent:#5fd0d6;--accent2:#a08bff;--accent-soft:#12303a;--glow:rgba(95,208,214,.16);--shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);--on-accent:#06262a}}
+:root[data-theme="dark"]{--bg:#0b1116;--bg2:#0f1820;--card:#121b22;--ink:#e7edf2;--muted:#98a6b3;--line:#22303a;--accent:#5fd0d6;--accent2:#a08bff;--accent-soft:#12303a;--glow:rgba(95,208,214,.16);--shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);--on-accent:#06262a}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 Inter,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+h1,h2,h3,.brand,.stat b{font-family:"Space Grotesk",Inter,system-ui,sans-serif}
 a{color:var(--accent);text-decoration:none}
-a:hover,a:focus{text-decoration:underline}
+a:hover,a:focus-visible{text-decoration:underline}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
 .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
-header.nav{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);z-index:5}
-header.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:56px;flex-wrap:wrap}
-.brand{font-weight:700;color:var(--ink);letter-spacing:.02em}
-nav a{color:var(--muted);margin-left:18px;font-size:.93rem}
-nav a:first-child{margin-left:0}
-.hero{padding:72px 0 48px}
-.eyebrow{color:var(--accent);font-weight:600;letter-spacing:.08em;text-transform:uppercase;font-size:.8rem}
-h1{font-size:clamp(2.1rem,6vw,3.3rem);line-height:1.1;margin:.3em 0 .4em;letter-spacing:-.02em}
-.lead{font-size:1.15rem;color:var(--muted);max-width:660px;margin:0 0 28px}
-.btns{display:flex;flex-wrap:wrap;gap:12px}
-.btn{display:inline-block;padding:10px 18px;border-radius:8px;border:1px solid var(--accent);font-weight:600}
-.btn.primary{background:var(--accent);color:var(--bg)}
-.btn:hover{text-decoration:none;opacity:.88}
-section{padding:44px 0;border-top:1px solid var(--line)}
-h2{font-size:1.45rem;margin:0 0 22px;letter-spacing:-.01em}
-h3{font-size:1.05rem;margin:0 0 4px}
-.grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
-.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;display:flex;flex-direction:column}
-.card p{margin:8px 0 14px;color:var(--muted);font-size:.95rem;flex:1}
+#progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));z-index:20}
+header.nav{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line)}
+header.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:60px}
+.brand{font-weight:700;color:var(--ink);letter-spacing:.01em;display:flex;align-items:center;gap:10px}
+.brand i{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;color:#fff;font-style:normal;font-size:.8rem}
+nav.links{display:flex;gap:4px;flex-wrap:wrap}
+nav.links a{color:var(--muted);font-size:.92rem;padding:6px 10px;border-radius:8px}
+nav.links a:hover,nav.links a.active{color:var(--ink);background:var(--accent-soft);text-decoration:none}
+.icon-btn{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;width:38px;height:38px;display:grid;place-items:center;cursor:pointer;flex:none}
+.icon-btn svg{width:18px;height:18px}
+.hero{position:relative;padding:84px 0 56px;overflow:hidden}
+#net{position:absolute;inset:0;width:100%;height:100%;z-index:0;opacity:.75}
+.hero-inner{position:relative;z-index:1}
+.status{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:5px 12px 5px 8px;font-size:.84rem;color:var(--muted);box-shadow:var(--shadow)}
+.dot{width:9px;height:9px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 0 rgba(34,197,94,.6);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 8px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
+h1{font-size:clamp(2.2rem,6vw,3.7rem);line-height:1.06;margin:18px 0 16px;letter-spacing:-.03em;max-width:820px}
+.grad{background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.rotator{display:inline-block;min-width:1ch;border-right:3px solid var(--accent);padding-right:4px;white-space:nowrap}
+.lead{font-size:1.12rem;color:var(--muted);max-width:680px;margin:0 0 28px}
+.btns{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:600 .95rem Inter,system-ui,sans-serif;cursor:pointer;transition:transform .15s,box-shadow .15s,border-color .15s}
+.btn:hover{text-decoration:none;transform:translateY(-1px);border-color:var(--accent);box-shadow:0 6px 18px var(--glow)}
+.btn.primary{background:linear-gradient(135deg,var(--accent),color-mix(in srgb,var(--accent) 60%,var(--accent2)));color:var(--on-accent);border-color:transparent}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:40px;max-width:820px}
+.stat{background:color-mix(in srgb,var(--card) 88%,transparent);border:1px solid var(--line);border-radius:14px;padding:14px 16px;box-shadow:var(--shadow)}
+.stat b{display:block;font-size:1.6rem;line-height:1.1;color:var(--ink)}
+.stat span{font-size:.8rem;color:var(--muted)}
+section{padding:64px 0;border-top:1px solid var(--line)}
+.sec-head{display:flex;align-items:end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+.kicker{color:var(--accent);font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-size:.75rem}
+h2{font-size:clamp(1.5rem,3vw,2rem);margin:4px 0 0;letter-spacing:-.02em}
+h3{font-size:1.08rem;margin:0 0 4px}
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:18px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);background:var(--card);color:var(--muted);border-radius:999px;padding:6px 14px;font:500 .88rem Inter,system-ui,sans-serif;cursor:pointer;transition:all .15s}
+.chip:hover{border-color:var(--accent);color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.search{flex:1;min-width:200px;max-width:320px;margin-left:auto;position:relative}
+.search input{width:100%;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;padding:9px 12px 9px 36px;font:inherit;font-size:.92rem}
+.search svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--muted)}
+.search kbd{position:absolute;right:9px;top:50%;transform:translateY(-50%);font:600 .72rem Inter,sans-serif;color:var(--muted);border:1px solid var(--line);border-radius:5px;padding:1px 6px}
+.count{font-size:.85rem;color:var(--muted);margin:-6px 0 14px}
+.grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+.card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px;display:flex;flex-direction:column;box-shadow:var(--shadow);transition:transform .2s ease,box-shadow .2s ease,border-color .2s;transform-style:preserve-3d;overflow:hidden}
+.card::before{content:"";position:absolute;inset:0;background:radial-gradient(400px circle at var(--mx,50%) var(--my,0%),var(--glow),transparent 40%);opacity:0;transition:opacity .25s;pointer-events:none}
+.card:hover{border-color:color-mix(in srgb,var(--accent) 45%,var(--line));box-shadow:0 14px 40px var(--glow)}
+.card:hover::before{opacity:1}
+.card p{margin:8px 0 14px;color:var(--muted);font-size:.94rem;flex:1}
+.card .top{display:flex;justify-content:space-between;align-items:start;gap:10px}
+.metric{flex:none;font:700 .78rem "Space Grotesk",Inter,sans-serif;color:var(--accent);background:var(--accent-soft);border-radius:8px;padding:3px 8px;white-space:nowrap}
 .tags{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px;padding:0;list-style:none}
-.tags li{background:var(--accent-soft);color:var(--accent);border-radius:999px;padding:2px 10px;font-size:.78rem;font-weight:600}
-.item{display:grid;grid-template-columns:170px 1fr;gap:6px 24px;padding:16px 0;border-top:1px solid var(--line)}
-.item:first-of-type{border-top:0;padding-top:0}
-.when{color:var(--muted);font-size:.9rem}
-.item p{margin:6px 0 0;color:var(--muted);font-size:.96rem}
-.role{color:var(--accent);font-weight:600;font-size:.93rem}
-.skills{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
-.skills p{margin:4px 0 0;color:var(--muted);font-size:.95rem}
-ul.plain{margin:0;padding-left:20px;color:var(--muted)}
-ul.plain li{margin:6px 0}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}
-.chip{border:1px solid var(--line);background:var(--card);color:var(--muted);border-radius:999px;padding:5px 14px;font:inherit;font-size:.88rem;cursor:pointer}
-.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
-.card .links{display:flex;gap:14px;flex-wrap:wrap;font-weight:600;font-size:.93rem}
-.card.new{border-color:var(--accent)}
-.badge{display:inline-block;background:var(--accent);color:var(--bg);border-radius:6px;font-size:.7rem;font-weight:700;padding:1px 7px;margin-left:6px;vertical-align:middle;letter-spacing:.04em}
-.cvgrid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
-.cvcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:8px}
+.tags li{background:var(--bg2);color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:1px 10px;font-size:.76rem;font-weight:600;cursor:pointer}
+.tags li:hover{color:var(--accent);border-color:var(--accent)}
+.card .links{display:flex;gap:10px;flex-wrap:wrap;font-weight:600;font-size:.9rem;align-items:center}
+.card .links a{display:inline-flex;align-items:center;gap:5px}
+.card .links a.live{background:var(--accent);color:var(--on-accent);border-radius:8px;padding:4px 10px}
+.card .links a.live:hover{text-decoration:none;opacity:.9}
+.more{margin-left:auto;border:0;background:none;color:var(--muted);font:600 .85rem Inter,sans-serif;cursor:pointer;padding:4px 0}
+.more:hover{color:var(--accent)}
+.card.new{border-color:color-mix(in srgb,var(--accent) 55%,var(--line))}
+.badge{display:inline-block;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border-radius:6px;font-size:.66rem;font-weight:700;padding:1px 7px;margin-left:6px;vertical-align:middle;letter-spacing:.05em}
+.empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:30px;border:1px dashed var(--line);border-radius:var(--r)}
+dialog#case{border:1px solid var(--line);border-radius:18px;background:var(--card);color:var(--ink);padding:0;max-width:640px;width:calc(100vw - 32px);box-shadow:0 30px 80px rgba(0,0,0,.35)}
+dialog#case::backdrop{background:rgba(5,12,18,.55);backdrop-filter:blur(3px)}
+.case-head{padding:22px 24px 14px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:12px;align-items:start}
+.case-body{padding:18px 24px 24px}
+.case-body h4{margin:16px 0 4px;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.case-body p{margin:0;color:var(--muted)}
+.cvgrid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.cvcard{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px;display:flex;flex-direction:column;gap:8px;box-shadow:var(--shadow);transition:transform .2s}
+.cvcard:hover{transform:translateY(-3px)}
 .cvcard p{margin:0;color:var(--muted);font-size:.92rem;flex:1}
-.cvcard .btn{text-align:center}
+.cvcard .btn{justify-content:center}
 .cvcard small a{color:var(--muted)}
-.spot{outline:3px solid var(--accent);outline-offset:6px;border-radius:12px;transition:outline-color .6s}
+.timeline{position:relative;margin-left:8px;padding-left:28px;border-left:2px solid var(--line)}
+.tl{position:relative;padding:0 0 28px}
+.tl::before{content:"";position:absolute;left:-36px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--card);border:3px solid var(--accent)}
+.tl .when{color:var(--muted);font-size:.85rem;font-weight:600}
+.tl p{margin:6px 0 0;color:var(--muted);font-size:.95rem;max-width:760px}
+.role{color:var(--accent);font-weight:600;font-size:.92rem}
+.skills{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.skillbox{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;box-shadow:var(--shadow)}
+.skillbox h3{font-size:.95rem;margin-bottom:10px}
+.skillbox .chips{gap:6px}
+.skillbox .chip{font-size:.8rem;padding:3px 11px}
+.hint{font-size:.88rem;color:var(--muted);margin:-8px 0 18px}
+.edu{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.edu .skillbox p{margin:4px 0 0;color:var(--muted);font-size:.93rem}
+ul.awards{list-style:none;padding:0;margin:0;display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+ul.awards li{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;color:var(--muted);font-size:.93rem;display:flex;gap:10px;align-items:start}
+ul.awards li b{color:var(--accent)}
+.contact-card{background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 14%,var(--card)),color-mix(in srgb,var(--accent2) 12%,var(--card)));border:1px solid var(--line);border-radius:20px;padding:32px;box-shadow:var(--shadow)}
+.contact-card .lead{margin-bottom:20px}
+.spot{outline:3px solid var(--accent);outline-offset:6px;border-radius:16px;transition:outline-color .6s}
 [hidden]{display:none!important}
-.chat-root{--chat-bg:var(--card);--chat-accent-ink:var(--bg)}
-footer{padding:32px 0 96px;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
-@media (max-width:640px){.item{grid-template-columns:1fr}.hero{padding:48px 0 32px}nav a{margin-left:12px}}
+.chat-root{--chat-bg:var(--card);--chat-accent-ink:var(--on-accent)}
+footer{padding:32px 0 100px;border-top:1px solid var(--line);color:var(--muted);font-size:.88rem}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+#totop{position:fixed;left:16px;bottom:16px;z-index:40;opacity:0;pointer-events:none;transition:opacity .2s}
+#totop.show{opacity:1;pointer-events:auto}
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+@media (max-width:820px){nav.links{display:none}.stats{grid-template-columns:repeat(2,1fr)}.search{max-width:none;margin-left:0}}
+@media (max-width:520px){.hero{padding:56px 0 40px}.contact-card{padding:22px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}}
 </style>
 </head>
 <body>
+<div id="progress" aria-hidden="true"></div>
 <header class="nav">
   <div class="wrap">
-    <a class="brand" href="#top">Bhuvann Vinodh Ram</a>
-    <nav aria-label="Sections">
+    <a class="brand" href="#top"><i aria-hidden="true">BV</i>Bhuvann Vinodh Ram</a>
+    <nav class="links" aria-label="Sections">
       <a href="#projects">Projects</a>
       <a href="#cv">CV</a>
       <a href="#experience">Experience</a>
@@ -75,210 +145,215 @@ footer{padding:32px 0 96px;border-top:1px solid var(--line);color:var(--muted);f
       <a href="#education">Education</a>
       <a href="#contact">Contact</a>
     </nav>
+    <button class="icon-btn" id="theme" type="button" aria-label="Switch light or dark theme" title="Switch theme">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
   </div>
 </header>
 
-<main id="top" class="wrap">
+<main id="top">
   <div class="hero">
-    <div class="eyebrow">Data and AI &middot; Dublin, Ireland</div>
-    <h1>Data pipelines, analysis and machine learning you can try.</h1>
-    <p class="lead">I'm Bhuvann, a graduate of the MSc in Artificial Intelligence for Medicine and Medical Research at University College Dublin. I build data pipelines, dashboards and machine learning models, and I publish them with tests, automation and live demos. I currently work in trust and safety at Accenture.</p>
-    <div class="btns">
-      <a class="btn primary" href="#projects">View projects</a>
-      <a class="btn" href="#cv">Download CV</a>
-      <button class="btn" type="button" id="tour-start">Take the guided tour</button>
-      <a class="btn" href="https://github.com/bhuvannv13">GitHub</a>
-      <a class="btn" href="https://www.linkedin.com/in/bhuvann-vinodh-ram-5545b3210/">LinkedIn</a>
+    <canvas id="net" aria-hidden="true"></canvas>
+    <div class="wrap hero-inner">
+      <span class="status"><span class="dot" aria-hidden="true"></span>Open to graduate data and AI roles &middot; Dublin &middot; Stamp 1G</span>
+      <h1>I build <span class="grad rotator" id="rot">data pipelines</span><br>you can actually try.</h1>
+      <p class="lead">I'm Bhuvann, a graduate of the MSc in Artificial Intelligence for Medicine and Medical Research at University College Dublin. I build data pipelines, dashboards and machine learning models, and I publish them with tests, automation and live demos. I currently work in trust and safety at Accenture.</p>
+      <div class="btns">
+        <a class="btn primary" href="#projects">View projects</a>
+        <a class="btn" href="#cv">Download CV</a>
+        <button class="btn" type="button" id="tour-start">Take the guided tour</button>
+        <a class="btn" href="https://github.com/bhuvannv13">GitHub</a>
+        <a class="btn" href="https://www.linkedin.com/in/bhuvann-vinodh-ram-5545b3210/">LinkedIn</a>
+      </div>
+      <div class="stats" aria-label="Highlights">
+        <div class="stat"><b data-count="0.989" data-dec="3">0.989</b><span>ROC AUC, conflict risk model on unseen 2022-26 data</span></div>
+        <div class="stat"><b data-count="96.01" data-dec="2" data-suffix="%">96.01%</b><span>ECG beat accuracy on 21,892 held-out beats</span></div>
+        <div class="stat"><b data-count="1549" data-dec="0">1,549</b><span>Tamil verses searchable in the browser</span></div>
+        <div class="stat"><b data-count="12" data-dec="0">12</b><span>projects with code, 2 with live demos</span></div>
+      </div>
     </div>
   </div>
 
   <section id="projects">
-    <h2>Selected projects</h2>
-    <div class="chips" role="group" aria-label="Filter projects by role">
-      <button class="chip" type="button" data-filter="all" aria-pressed="true">All</button>
-      <button class="chip" type="button" data-filter="de" aria-pressed="false">Data engineering</button>
-      <button class="chip" type="button" data-filter="da" aria-pressed="false">Data analysis</button>
-      <button class="chip" type="button" data-filter="ai" aria-pressed="false">AI engineering</button>
-    </div>
-    <div class="grid">
-      <article class="card new" id="p-conflict" data-roles="de da ai">
-        <h3>Conflict Risk Monitor <span class="badge">NEW</span></h3>
-        <p>A monthly pipeline that pulls UCDP conflict-event data and World Bank indicators, builds a 176-country panel, compares three models on a time-based split, and publishes a dashboard with an in-browser chat assistant. Refreshes itself on GitHub Actions.</p>
-        <ul class="tags"><li>ETL</li><li>scikit-learn</li><li>GitHub Actions</li><li>Dashboard</li></ul>
-        <div class="links"><a href="https://bhuvannv13.github.io/conflict-risk-monitor/">Live demo</a><a href="https://github.com/bhuvannv13/conflict-risk-monitor">Code</a></div>
-      </article>
-      <article class="card new" id="p-tamil" data-roles="ai de">
-        <h3>Tamil Thedal (தமிழ் தேடல்) <span class="badge">NEW</span></h3>
-        <p>A search engine for 1,549 Tamil verses (Thirukkural, Aathichudi, Puthiya Aathichudi) by theme, author and category, with grammar lessons, a history timeline, an OpenCV.js inscription reader and a free chat helper. Runs entirely in the browser.</p>
-        <ul class="tags"><li>Search</li><li>OpenCV.js</li><li>NLP</li><li>Python ETL</li></ul>
-        <div class="links"><a href="https://bhuvannv13.github.io/tamil-thedal/">Live demo</a><a href="https://github.com/bhuvannv13/tamil-thedal">Code</a></div>
-      </article>
-      <article class="card" id="p-hgsoc" data-roles="ai da">
-        <h3>Ovarian cancer survival (HGSOC)</h3>
-        <p>XGBoost on TCGA clinical and mutation data with SHAP explanations. I found follow-up variables that leaked the outcome, removed them and reran the notebook end to end in GitHub Actions: 0.78 test accuracy, 0.91 ROC AUC.</p>
-        <ul class="tags"><li>XGBoost</li><li>SHAP</li><li>Leakage checks</li></ul>
-        <div class="links"><a href="https://github.com/bhuvannv13/HGSOC-survival">Code</a></div>
-      </article>
-      <article class="card" id="p-ecg" data-roles="ai">
-        <h3>ECG heartbeat classification</h3>
-        <p>A 1D convolutional network that classifies MIT-BIH heartbeats into five beat types: 96.01% accuracy on 21,892 held-out beats, reproduced by an automated rerun.</p>
-        <ul class="tags"><li>1D CNN</li><li>Keras</li><li>Reproducible</li></ul>
-        <div class="links"><a href="https://github.com/bhuvannv13/ECG_Classification_CNN">Code</a></div>
-      </article>
-      <article class="card" id="p-twitter" data-roles="ai">
-        <h3>Emotion classification from tweets</h3>
-        <p>A dual-input BiLSTM that combines word embeddings with a sentiment polarity score: 90.63% test accuracy, served as a Gradio web app.</p>
-        <ul class="tags"><li>NLP</li><li>BiLSTM</li><li>Gradio</li></ul>
-        <div class="links"><a href="https://github.com/bhuvannv13/Twitter-Emotional-Classification">Code</a></div>
-      </article>
-      <article class="card" id="p-brain" data-roles="ai">
-        <h3>Brain tumour classification from MRI</h3>
-        <p>A four-class CNN (0.80 accuracy, 0.77 macro F1 on 2,258 test images) and ResNet50 transfer learning, deployed as a Streamlit app with unit tests and CI.</p>
-        <ul class="tags"><li>CNN</li><li>Streamlit</li><li>pytest</li></ul>
-        <div class="links"><a href="https://github.com/bhuvannv13/Brain_Tumour_classification_api">Code</a></div>
-      </article>
-      <article class="card" id="p-omics" data-roles="ai da">
-        <h3>Multi-omics subtyping of colon adenocarcinoma</h3>
-        <p>Integrated RNA-seq, copy-number and methylation data from TCGA with a variational autoencoder, clustered the latent space and tested the subtypes with survival analysis, SHAP and STRING networks.</p>
-        <ul class="tags"><li>VAE</li><li>Multi-omics</li><li>Survival analysis</li></ul>
-        <div class="links"><a href="https://github.com/bhuvannv13/Integrative-Multi-Omics-Subtyping-of-Colon-Adenocarcinoma-Using-Deep-Learning-and-Explainable-AI">Code</a></div>
-      </article>
-      <article class="card" id="p-retail" data-roles="da de">
-        <h3>Retail sales register analysis</h3>
-        <p>Scraped multi-page sales records with Beautiful Soup, cleaned them, and explored customer behaviour, payment methods and profit trends across locations and time.</p>
-        <ul class="tags"><li>Web scraping</li><li>pandas</li><li>EDA</li></ul>
-        <div class="links"><a href="https://github.com/bhuvannv13/RetailSalesRegister_Data_Analysis">Code</a></div>
-      </article>
-      <article class="card" id="p-vle" data-roles="da">
-        <h3>Student engagement analysis (VLE)</h3>
-        <p>Voting ensembles of random forest, logistic regression, gradient boosting and SVM models on virtual learning environment data, compared across feature-selection settings.</p>
-        <ul class="tags"><li>scikit-learn</li><li>Ensembles</li></ul>
-        <div class="links"><a href="https://github.com/bhuvannv13/VLE-Data-Analysis-Python">Code</a></div>
-      </article>
-      <article class="card" id="p-rnaseq" data-roles="da">
-        <h3>RNA-seq analysis of HER2 in breast cancer</h3>
-        <p>Differential expression, pathway enrichment and survival modelling in R to study how HER2 amplification changes gene expression and patient outcomes.</p>
-        <ul class="tags"><li>R</li><li>DESeq2</li><li>Enrichment</li></ul>
-        <div class="links"><a href="https://github.com/bhuvannv13/RNASeqinBC">Code</a></div>
-      </article>
-      <article class="card" id="p-prescription" data-roles="ai">
-        <h3>Handwritten prescription reader</h3>
-        <p>Object detection with Detectron2 to find handwritten medicine names in prescription images, trained on a custom annotated dataset.</p>
-        <ul class="tags"><li>Detectron2</li><li>Object detection</li></ul>
-        <div class="links"><a href="https://github.com/bhuvannv13/Prescription-Reader">Code</a></div>
-      </article>
+    <div class="wrap">
+      <div class="sec-head reveal"><div><div class="kicker">Work</div><h2>Selected projects</h2></div></div>
+      <div class="toolbar">
+        <div class="chips" role="group" aria-label="Filter projects by role">
+          <button class="chip" type="button" data-filter="all" aria-pressed="true">All</button>
+          <button class="chip" type="button" data-filter="de" aria-pressed="false">Data engineering</button>
+          <button class="chip" type="button" data-filter="da" aria-pressed="false">Data analysis</button>
+          <button class="chip" type="button" data-filter="ai" aria-pressed="false">AI engineering</button>
+        </div>
+        <label class="search"><span class="visually-hidden" hidden>Search projects</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input id="q" type="search" placeholder="Search projects, e.g. SHAP" aria-label="Search projects" autocomplete="off"><kbd aria-hidden="true">/</kbd>
+        </label>
+      </div>
+      <p class="count"><span id="count" aria-live="polite"></span> <button class="more" type="button" id="reset" hidden style="margin-left:8px">Reset filters ✕</button></p>
+      <div class="grid" id="grid">
+        <article class="card new" id="p-conflict" data-roles="de da ai" data-skills="python pandas scikit-learn gradient boosting etl github actions javascript dashboard tf-idf retrieval forecasting">
+          <div class="top"><h3>Conflict Risk Monitor <span class="badge">NEW</span></h3><span class="metric">AUC 0.989</span></div>
+          <p>A monthly pipeline that pulls UCDP conflict-event data and World Bank indicators, builds a 176-country panel, compares three models on a time-based split, and publishes a dashboard with an in-browser chat assistant. Refreshes itself on GitHub Actions.</p>
+          <ul class="tags"><li>ETL</li><li>scikit-learn</li><li>GitHub Actions</li><li>Dashboard</li></ul>
+          <div class="links"><a class="live" href="https://bhuvannv13.github.io/conflict-risk-monitor/">Live demo ↗</a><a href="https://github.com/bhuvannv13/conflict-risk-monitor">Code</a><button class="more" type="button" data-case="p-conflict">Case study →</button></div>
+        </article>
+        <article class="card new" id="p-tamil" data-roles="ai de" data-skills="javascript opencv opencv.js tesseract.js ocr search nlp tf-idf python etl computer vision">
+          <div class="top"><h3>Tamil Thedal (தமிழ் தேடல்) <span class="badge">NEW</span></h3><span class="metric">1,549 verses</span></div>
+          <p>A search engine for 1,549 Tamil verses (Thirukkural, Aathichudi, Puthiya Aathichudi) by theme, author and category, with grammar lessons, a history timeline, an OpenCV.js inscription reader and a free chat helper. Runs entirely in the browser.</p>
+          <ul class="tags"><li>Search</li><li>OpenCV.js</li><li>NLP</li><li>Python ETL</li></ul>
+          <div class="links"><a class="live" href="https://bhuvannv13.github.io/tamil-thedal/">Live demo ↗</a><a href="https://github.com/bhuvannv13/tamil-thedal">Code</a><button class="more" type="button" data-case="p-tamil">Case study →</button></div>
+        </article>
+        <article class="card new" id="p-checkout" data-roles="da de" data-skills="sql data modelling dbt data quality a/b testing statistics cuped python sqlite pipeline dashboard github actions pytest">
+          <div class="top"><h3>Checkout redesign A/B test <span class="badge">NEW</span></h3><span class="metric">+5.2% lift</span></div>
+          <p>Raw event exports cleaned and modelled in SQL (staging, intermediate and mart layers, dbt-style, with data-quality tests), then a full experiment readout: SRM check, z-test, Welch t-test, bootstrap CI, CUPED, Holm correction and power. Simulated data, 200,000 users.</p>
+          <ul class="tags"><li>SQL</li><li>A/B testing</li><li>Data quality</li><li>Statistics</li></ul>
+          <div class="links"><a href="https://github.com/bhuvannv13/checkout-experiment-analytics">Code</a><button class="more" type="button" data-case="p-checkout">Case study →</button></div>
+        </article>
+        <article class="card" id="p-hgsoc" data-roles="ai da" data-skills="python xgboost shap leakage checks tcga healthcare github actions survival">
+          <div class="top"><h3>Ovarian cancer survival (HGSOC)</h3><span class="metric">AUC 0.91</span></div>
+          <p>XGBoost on TCGA clinical and mutation data with SHAP explanations. I found follow-up variables that leaked the outcome, removed them and reran the notebook end to end in GitHub Actions: 0.78 test accuracy, 0.91 ROC AUC.</p>
+          <ul class="tags"><li>XGBoost</li><li>SHAP</li><li>Leakage checks</li></ul>
+          <div class="links"><a href="https://github.com/bhuvannv13/HGSOC-survival">Code</a><button class="more" type="button" data-case="p-hgsoc">Case study →</button></div>
+        </article>
+        <article class="card" id="p-ecg" data-roles="ai" data-skills="python keras tensorflow 1d cnn deep learning healthcare signal reproducible github actions">
+          <div class="top"><h3>ECG heartbeat classification</h3><span class="metric">96.01%</span></div>
+          <p>A 1D convolutional network that classifies MIT-BIH heartbeats into five beat types: 96.01% accuracy on 21,892 held-out beats, reproduced by an automated rerun.</p>
+          <ul class="tags"><li>1D CNN</li><li>Keras</li><li>Reproducible</li></ul>
+          <div class="links"><a href="https://github.com/bhuvannv13/ECG_Classification_CNN">Code</a></div>
+        </article>
+        <article class="card" id="p-twitter" data-roles="ai" data-skills="python nlp bilstm tensorflow gradio deep learning text classification">
+          <div class="top"><h3>Emotion classification from tweets</h3><span class="metric">90.63%</span></div>
+          <p>A dual-input BiLSTM that combines word embeddings with a sentiment polarity score: 90.63% test accuracy, served as a Gradio web app.</p>
+          <ul class="tags"><li>NLP</li><li>BiLSTM</li><li>Gradio</li></ul>
+          <div class="links"><a href="https://github.com/bhuvannv13/Twitter-Emotional-Classification">Code</a></div>
+        </article>
+        <article class="card" id="p-brain" data-roles="ai" data-skills="python cnn resnet50 transfer learning streamlit pytest opencv computer vision deep learning healthcare">
+          <div class="top"><h3>Brain tumour classification from MRI</h3><span class="metric">0.80 acc</span></div>
+          <p>A four-class CNN (0.80 accuracy, 0.77 macro F1 on 2,258 test images) and ResNet50 transfer learning, deployed as a Streamlit app with unit tests and CI.</p>
+          <ul class="tags"><li>CNN</li><li>Streamlit</li><li>pytest</li></ul>
+          <div class="links"><a href="https://github.com/bhuvannv13/Brain_Tumour_classification_api">Code</a></div>
+        </article>
+        <article class="card" id="p-omics" data-roles="ai da" data-skills="python vae deep learning multi-omics shap survival hdbscan k-means tcga healthcare clustering">
+          <div class="top"><h3>Multi-omics subtyping of colon adenocarcinoma</h3><span class="metric">VAE</span></div>
+          <p>Integrated RNA-seq, copy-number and methylation data from TCGA with a variational autoencoder, clustered the latent space and tested the subtypes with survival analysis, SHAP and STRING networks.</p>
+          <ul class="tags"><li>VAE</li><li>Multi-omics</li><li>Survival analysis</li></ul>
+          <div class="links"><a href="https://github.com/bhuvannv13/Integrative-Multi-Omics-Subtyping-of-Colon-Adenocarcinoma-Using-Deep-Learning-and-Explainable-AI">Code</a></div>
+        </article>
+        <article class="card" id="p-retail" data-roles="da de" data-skills="python web scraping beautiful soup pandas eda data cleaning">
+          <div class="top"><h3>Retail sales register analysis</h3><span class="metric">EDA</span></div>
+          <p>Scraped multi-page sales records with Beautiful Soup, cleaned them, and explored customer behaviour, payment methods and profit trends across locations and time.</p>
+          <ul class="tags"><li>Web scraping</li><li>pandas</li><li>EDA</li></ul>
+          <div class="links"><a href="https://github.com/bhuvannv13/RetailSalesRegister_Data_Analysis">Code</a></div>
+        </article>
+        <article class="card" id="p-vle" data-roles="da" data-skills="python scikit-learn ensembles random forest svm feature selection">
+          <div class="top"><h3>Student engagement analysis (VLE)</h3><span class="metric">Ensembles</span></div>
+          <p>Voting ensembles of random forest, logistic regression, gradient boosting and SVM models on virtual learning environment data, compared across feature-selection settings.</p>
+          <ul class="tags"><li>scikit-learn</li><li>Ensembles</li></ul>
+          <div class="links"><a href="https://github.com/bhuvannv13/VLE-Data-Analysis-Python">Code</a></div>
+        </article>
+        <article class="card" id="p-rnaseq" data-roles="da" data-skills="r deseq2 enrichment survival healthcare statistics">
+          <div class="top"><h3>RNA-seq analysis of HER2 in breast cancer</h3><span class="metric">R</span></div>
+          <p>Differential expression, pathway enrichment and survival modelling in R to study how HER2 amplification changes gene expression and patient outcomes.</p>
+          <ul class="tags"><li>R</li><li>DESeq2</li><li>Enrichment</li></ul>
+          <div class="links"><a href="https://github.com/bhuvannv13/RNASeqinBC">Code</a></div>
+        </article>
+        <article class="card" id="p-prescription" data-roles="ai" data-skills="python detectron2 object detection computer vision healthcare">
+          <div class="top"><h3>Handwritten prescription reader</h3><span class="metric">Detectron2</span></div>
+          <p>Object detection with Detectron2 to find handwritten medicine names in prescription images, trained on a custom annotated dataset.</p>
+          <ul class="tags"><li>Detectron2</li><li>Object detection</li></ul>
+          <div class="links"><a href="https://github.com/bhuvannv13/Prescription-Reader">Code</a></div>
+        </article>
+        <div class="empty" id="empty" hidden>No projects match that search. <button class="more" type="button" id="clear">Clear filters</button></div>
+      </div>
     </div>
   </section>
 
+  <dialog id="case" aria-labelledby="case-title">
+    <div class="case-head"><div><div class="kicker">Case study</div><h3 id="case-title"></h3></div><button class="icon-btn" type="button" id="case-close" aria-label="Close">✕</button></div>
+    <div class="case-body" id="case-body"></div>
+  </dialog>
+
   <section id="cv">
-    <h2>CV downloads</h2>
-    <p class="lead" style="font-size:1rem">One full CV and three versions focused on entry-level roles, each as a PDF or an editable Word file. All are generated from the same source, so they always agree.</p>
-    <div class="cvgrid">
-      <div class="cvcard"><h3>Full CV</h3><p>Everything: education, experience, all projects, skills and awards.</p><a class="btn primary" href="cv/Bhuvann_Vinodh_Ram_CV.pdf" download>Download PDF</a><a class="btn" href="cv/Bhuvann_Vinodh_Ram_CV.docx" download>Word (.docx)</a><small><a href="cv/Bhuvann_Vinodh_Ram_CV.html">View in browser</a></small></div>
-      <div class="cvcard"><h3>Data Engineer</h3><p>Pipelines, APIs, automation, Docker and CI.</p><a class="btn primary" href="cv/Bhuvann_Vinodh_Ram_CV_Data_Engineer.pdf" download>Download PDF</a><a class="btn" href="cv/Bhuvann_Vinodh_Ram_CV_Data_Engineer.docx" download>Word (.docx)</a><small><a href="cv/Bhuvann_Vinodh_Ram_CV_Data_Engineer.html">View in browser</a></small></div>
-      <div class="cvcard"><h3>Data Analyst</h3><p>Cleaning, statistics, dashboards and reporting.</p><a class="btn primary" href="cv/Bhuvann_Vinodh_Ram_CV_Data_Analyst.pdf" download>Download PDF</a><a class="btn" href="cv/Bhuvann_Vinodh_Ram_CV_Data_Analyst.docx" download>Word (.docx)</a><small><a href="cv/Bhuvann_Vinodh_Ram_CV_Data_Analyst.html">View in browser</a></small></div>
-      <div class="cvcard"><h3>AI Engineer</h3><p>Model building, evaluation, explainability and deployment.</p><a class="btn primary" href="cv/Bhuvann_Vinodh_Ram_CV_AI_Engineer.pdf" download>Download PDF</a><a class="btn" href="cv/Bhuvann_Vinodh_Ram_CV_AI_Engineer.docx" download>Word (.docx)</a><small><a href="cv/Bhuvann_Vinodh_Ram_CV_AI_Engineer.html">View in browser</a></small></div>
+    <div class="wrap">
+      <div class="sec-head reveal"><div><div class="kicker">Downloads</div><h2>CV downloads</h2></div></div>
+      <p class="hint">One full CV and three versions focused on entry-level roles, each as a PDF or an editable Word file. All are generated from the same source, so they always agree.</p>
+      <div class="cvgrid">
+        <div class="cvcard reveal"><h3>Full CV</h3><p>Everything: education, experience, all projects, skills and awards.</p><a class="btn primary" href="cv/Bhuvann_Vinodh_Ram_CV.pdf" download>Download PDF</a><a class="btn" href="cv/Bhuvann_Vinodh_Ram_CV.docx" download>Word (.docx)</a><small><a href="cv/Bhuvann_Vinodh_Ram_CV.html">View in browser</a></small></div>
+        <div class="cvcard reveal"><h3>Data Engineer</h3><p>Pipelines, APIs, automation, Docker and CI.</p><a class="btn primary" href="cv/Bhuvann_Vinodh_Ram_CV_Data_Engineer.pdf" download>Download PDF</a><a class="btn" href="cv/Bhuvann_Vinodh_Ram_CV_Data_Engineer.docx" download>Word (.docx)</a><small><a href="cv/Bhuvann_Vinodh_Ram_CV_Data_Engineer.html">View in browser</a></small></div>
+        <div class="cvcard reveal"><h3>Data Analyst</h3><p>Cleaning, statistics, dashboards and reporting.</p><a class="btn primary" href="cv/Bhuvann_Vinodh_Ram_CV_Data_Analyst.pdf" download>Download PDF</a><a class="btn" href="cv/Bhuvann_Vinodh_Ram_CV_Data_Analyst.docx" download>Word (.docx)</a><small><a href="cv/Bhuvann_Vinodh_Ram_CV_Data_Analyst.html">View in browser</a></small></div>
+        <div class="cvcard reveal"><h3>AI Engineer</h3><p>Model building, evaluation, explainability and deployment.</p><a class="btn primary" href="cv/Bhuvann_Vinodh_Ram_CV_AI_Engineer.pdf" download>Download PDF</a><a class="btn" href="cv/Bhuvann_Vinodh_Ram_CV_AI_Engineer.docx" download>Word (.docx)</a><small><a href="cv/Bhuvann_Vinodh_Ram_CV_AI_Engineer.html">View in browser</a></small></div>
+      </div>
     </div>
   </section>
 
   <section id="experience">
-    <h2>Experience</h2>
-    <div class="item">
-      <div class="when">Mar 2026 to present</div>
-      <div>
-        <h3>Accenture, Dublin</h3>
-        <div class="role">Trust and Safety Associate</div>
-        <p>Evaluate, classify and moderate user-generated content to ensure online safety and compliance with client platform policies for trust and safety.</p>
-      </div>
-    </div>
-    <div class="item">
-      <div class="when">Apr 2025 to Sep 2025</div>
-      <div>
-        <h3>University College Dublin</h3>
-        <div class="role">Research Intern</div>
-        <p>Ran an integrative multi-omics analysis of TCGA colon adenocarcinoma. Trained a variational autoencoder over RNA-seq, copy-number and methylation data, clustered the latent space with K-Means and HDBSCAN, and assessed clinical relevance with Kaplan-Meier curves and log-rank tests.</p>
-      </div>
-    </div>
-    <div class="item">
-      <div class="when">Jan 2024 to Jun 2024</div>
-      <div>
-        <h3>Centre for Toxicology and Development, SRIHER, Chennai</h3>
-        <div class="role">Project Intern</div>
-        <p>Built a video-to-data pipeline for zebrafish behaviour analysis used in drug testing: tracked fish across tanks and layers, computed movement measures such as speed and velocity, and generated charts and reports.</p>
-      </div>
-    </div>
-    <div class="item">
-      <div class="when">Dec 2022 to Feb 2023</div>
-      <div>
-        <h3>IIITDM Kancheepuram</h3>
-        <div class="role">Research Intern</div>
-        <p>Developed and compared CNN-based breast cancer classifiers using pre-trained models including VGG16, ResNet, MobileNet and EfficientNet.</p>
-      </div>
-    </div>
-    <div class="item">
-      <div class="when">Feb 2022 to Apr 2022</div>
-      <div>
-        <h3>Smartail Pvt. Ltd., Chennai</h3>
-        <div class="role">Intern</div>
-        <p>Dockerised UI websites and deployed them to servers through GitLab CI/CD pipelines, and worked on image processing with Detectron2.</p>
+    <div class="wrap">
+      <div class="sec-head reveal"><div><div class="kicker">Journey</div><h2>Experience</h2></div></div>
+      <div class="timeline">
+        <div class="tl reveal"><div class="when">Mar 2026 to present</div><h3>Accenture, Dublin</h3><div class="role">Trust and Safety Associate</div><p>Evaluate, classify and moderate user-generated content to ensure online safety and compliance with client platform policies for trust and safety.</p></div>
+        <div class="tl reveal"><div class="when">Apr 2025 to Sep 2025</div><h3>University College Dublin</h3><div class="role">Research Intern</div><p>Ran an integrative multi-omics analysis of TCGA colon adenocarcinoma. Trained a variational autoencoder over RNA-seq, copy-number and methylation data, clustered the latent space with K-Means and HDBSCAN, and assessed clinical relevance with Kaplan-Meier curves and log-rank tests.</p></div>
+        <div class="tl reveal"><div class="when">Jan 2024 to Jun 2024</div><h3>Centre for Toxicology and Development, SRIHER, Chennai</h3><div class="role">Project Intern</div><p>Built a video-to-data pipeline for zebrafish behaviour analysis used in drug testing: tracked fish across tanks and layers, computed movement measures such as speed and velocity, and generated charts and reports.</p></div>
+        <div class="tl reveal"><div class="when">Dec 2022 to Feb 2023</div><h3>IIITDM Kancheepuram</h3><div class="role">Research Intern</div><p>Developed and compared CNN-based breast cancer classifiers using pre-trained models including VGG16, ResNet, MobileNet and EfficientNet.</p></div>
+        <div class="tl reveal"><div class="when">Feb 2022 to Apr 2022</div><h3>Smartail Pvt. Ltd., Chennai</h3><div class="role">Intern</div><p>Dockerised UI websites and deployed them to servers through GitLab CI/CD pipelines, and worked on image processing with Detectron2.</p></div>
       </div>
     </div>
   </section>
 
   <section id="skills">
-    <h2>Skills</h2>
-    <div class="skills">
-      <div><h3>Languages</h3><p>Python, R, SQL, JavaScript, MATLAB</p></div>
-      <div><h3>Machine learning</h3><p>scikit-learn, XGBoost, feature engineering, hyperparameter tuning, ensembles</p></div>
-      <div><h3>Deep learning</h3><p>TensorFlow, PyTorch, CNNs, BiLSTM, VAEs, U-Net</p></div>
-      <div><h3>Computer vision</h3><p>OpenCV, Detectron2, classification, segmentation, object detection</p></div>
-      <div><h3>Explainable AI</h3><p>SHAP, model interpretability</p></div>
-      <div><h3>Data engineering</h3><p>ETL with pandas, REST APIs, web scraping, GitHub Actions, GitLab CI/CD, Docker, pytest</p></div>
-      <div><h3>Data and tools</h3><p>SQL, Tableau, Plotly, Git, Jupyter, Streamlit, Gradio, OpenCV.js</p></div>
+    <div class="wrap">
+      <div class="sec-head reveal"><div><div class="kicker">Toolkit</div><h2>Skills</h2></div></div>
+      <p class="hint">Click a skill to see the projects that use it.</p>
+      <div class="skills" id="skillboxes">
+        <div class="skillbox reveal"><h3>Languages</h3><div class="chips"><button class="chip" data-skill="python">Python</button><button class="chip" data-skill="r">R</button><button class="chip" data-skill="sql">SQL</button><button class="chip" data-skill="a/b testing">A/B testing</button><button class="chip" data-skill="javascript">JavaScript</button><span class="chip" style="cursor:default">MATLAB</span></div></div>
+        <div class="skillbox reveal"><h3>Machine learning</h3><div class="chips"><button class="chip" data-skill="scikit-learn">scikit-learn</button><button class="chip" data-skill="xgboost">XGBoost</button><button class="chip" data-skill="ensembles">Ensembles</button><button class="chip" data-skill="feature selection">Feature engineering</button><button class="chip" data-skill="gradient boosting">Gradient boosting</button></div></div>
+        <div class="skillbox reveal"><h3>Deep learning</h3><div class="chips"><button class="chip" data-skill="tensorflow">TensorFlow / Keras</button><button class="chip" data-skill="cnn">CNNs</button><button class="chip" data-skill="bilstm">BiLSTM</button><button class="chip" data-skill="vae">VAEs</button><button class="chip" data-skill="transfer learning">Transfer learning</button></div></div>
+        <div class="skillbox reveal"><h3>Computer vision</h3><div class="chips"><button class="chip" data-skill="opencv">OpenCV</button><button class="chip" data-skill="detectron2">Detectron2</button><button class="chip" data-skill="object detection">Object detection</button><button class="chip" data-skill="ocr">OCR</button></div></div>
+        <div class="skillbox reveal"><h3>Explainable AI and statistics</h3><div class="chips"><button class="chip" data-skill="shap">SHAP</button><button class="chip" data-skill="leakage">Leakage checks</button><button class="chip" data-skill="survival">Survival analysis</button><button class="chip" data-skill="clustering">Clustering</button></div></div>
+        <div class="skillbox reveal"><h3>Data engineering and shipping</h3><div class="chips"><button class="chip" data-skill="etl">ETL</button><button class="chip" data-skill="web scraping">Web scraping</button><button class="chip" data-skill="github actions">GitHub Actions</button><button class="chip" data-skill="streamlit">Streamlit</button><button class="chip" data-skill="gradio">Gradio</button><button class="chip" data-skill="pytest">pytest</button><button class="chip" data-skill="dashboard">Dashboards</button></div></div>
+      </div>
     </div>
   </section>
 
   <section id="education">
-    <h2>Education</h2>
-    <div class="item">
-      <div class="when">2024 to 2025</div>
-      <div>
-        <h3>University College Dublin</h3>
-        <div class="role">MSc, Artificial Intelligence for Medicine and Medical Research</div>
+    <div class="wrap">
+      <div class="sec-head reveal"><div><div class="kicker">Learning</div><h2>Education</h2></div></div>
+      <div class="edu">
+        <div class="skillbox reveal"><div class="when" style="color:var(--muted);font-size:.85rem;font-weight:600">2024 to 2025</div><h3>University College Dublin</h3><p class="role">MSc, Artificial Intelligence for Medicine and Medical Research</p></div>
+        <div class="skillbox reveal"><div class="when" style="color:var(--muted);font-size:.85rem;font-weight:600">2020 to 2024</div><h3>Sri Ramachandra Institute of Higher Education and Research, Chennai</h3><p class="role">BTech, Computer Science and Medical Engineering</p></div>
       </div>
+      <h2 style="margin:40px 0 18px;font-size:1.3rem">Awards and events</h2>
+      <ul class="awards">
+        <li class="reveal"><b>★</b>UCD Innovation Challenge 2024: Innovation Spark Award</li>
+        <li class="reveal"><b>★</b>NASA Space Apps Challenge 2024: built a climate storytelling website with a team</li>
+        <li class="reveal"><b>★</b>UCD Advantage Award</li>
+        <li class="reveal"><b>★</b>First place, Tamil poetry competition (Agal Tamil Club)</li>
+      </ul>
     </div>
-    <div class="item">
-      <div class="when">2020 to 2024</div>
-      <div>
-        <h3>Sri Ramachandra Institute of Higher Education and Research, Chennai</h3>
-        <div class="role">BTech, Computer Science and Medical Engineering</div>
-      </div>
-    </div>
-    <h2 style="margin-top:36px">Awards and events</h2>
-    <ul class="plain">
-      <li>UCD Innovation Challenge 2024: Innovation Spark Award</li>
-      <li>NASA Space Apps Challenge 2024: built a climate storytelling website with a team</li>
-      <li>UCD Advantage Award</li>
-      <li>First place, Tamil poetry competition (Agal Tamil Club)</li>
-    </ul>
   </section>
 
   <section id="contact">
-    <h2>Contact</h2>
-    <p class="lead">I'm open to roles in machine learning, data science and AI for healthcare. The best way to reach me is on LinkedIn.</p>
-    <div class="btns">
-      <a class="btn primary" href="https://www.linkedin.com/in/bhuvann-vinodh-ram-5545b3210/">Message me on LinkedIn</a>
-      <a class="btn" href="https://github.com/bhuvannv13">See my code on GitHub</a>
-      <a class="btn" href="#cv">Download my CV</a>
+    <div class="wrap">
+      <div class="contact-card reveal">
+        <div class="kicker">Contact</div>
+        <h2 style="margin-bottom:10px">Let's build something useful.</h2>
+        <p class="lead">I'm open to roles in machine learning, data science and AI for healthcare. The best way to reach me is on LinkedIn.</p>
+        <div class="btns">
+          <a class="btn primary" href="https://www.linkedin.com/in/bhuvann-vinodh-ram-5545b3210/">Message me on LinkedIn</a>
+          <a class="btn" href="https://github.com/bhuvannv13">See my code on GitHub</a>
+          <a class="btn" href="#cv">Download my CV</a>
+        </div>
+      </div>
     </div>
   </section>
 </main>
 
+<button class="icon-btn" id="totop" type="button" aria-label="Back to top">↑</button>
 <footer>
-  <div class="wrap">&copy; <span id="y">2026</span> Bhuvann Vinodh Ram</div>
+  <div class="wrap"><span>&copy; <span id="y">2026</span> Bhuvann Vinodh Ram</span><span>Built by hand, hosted on GitHub Pages. Press <kbd>/</kbd> to search projects.</span></div>
 </footer>
 <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
 <script src="assets/chat.js"></script>
 <script src="assets/guide.js"></script>
+<script src="assets/site.js"></script>
 </body>
 </html>

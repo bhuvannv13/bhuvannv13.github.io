@@ -23,6 +23,9 @@
     { id: "p-tamil", name: "Tamil Thedal", keys: "tamil thedal thirukkural kural aathichudi bharathi poem verse grammar history inscription kalvettu opencv search",
       text: "A search engine for 1,549 Tamil verses: you can search by word, theme, author or category, browse Thirukkural by chapter, learn grammar and history, and try an OpenCV.js inscription reader that compares letter shapes with Tamil-Brahmi, Grantha and modern Tamil. Bhuvann also won a Tamil poetry competition, so this one is close to his heart!",
       live: "https://bhuvannv13.github.io/tamil-thedal/", code: "https://github.com/bhuvannv13/tamil-thedal" },
+    { id: "p-checkout", name: "Checkout redesign A/B test", keys: "checkout ab a/b test experiment sql dbt data modelling data quality cuped statistics conversion analyst",
+      text: "An end-to-end analytics project on simulated data for 200,000 users. Messy raw exports are cleaned and modelled in nine SQL models (staging, intermediate and marts, dbt-style) with data-quality tests, then the A/B test is read out properly: SRM check, z-test, Welch t-test, bootstrap CI, CUPED, Holm correction and power. Result: a +5.2% relative lift in conversion (p = 0.016).",
+      code: "https://github.com/bhuvannv13/checkout-experiment-analytics" },
     { id: "p-hgsoc", name: "Ovarian cancer survival (HGSOC)", keys: "hgsoc ovarian cancer survival xgboost shap tcga leakage",
       text: "XGBoost on TCGA clinical and mutation data, explained with SHAP. The best part: Bhuvann spotted follow-up variables that leaked the answer, removed them and reran everything in GitHub Actions. Honest numbers: 0.78 accuracy and 0.91 ROC AUC.",
       code: "https://github.com/bhuvannv13/HGSOC-survival" },
@@ -49,9 +52,9 @@
   ];
 
   const ROLES = {
-    de: { name: "Data Engineer", file: "cv/Bhuvann_Vinodh_Ram_CV_Data_Engineer.pdf", projects: ["p-conflict", "p-tamil", "p-hgsoc", "p-retail"],
+    de: { name: "Data Engineer", file: "cv/Bhuvann_Vinodh_Ram_CV_Data_Engineer.pdf", projects: ["p-conflict", "p-checkout", "p-tamil", "p-hgsoc", "p-retail"],
           pitch: "For data engineering, look at the Conflict Risk Monitor first: scheduled extraction from two public sources, a tested transformation step and automatic publishing. Before that, Bhuvann containerised apps with Docker and shipped them through GitLab CI/CD at Smartail." },
-    da: { name: "Data Analyst", file: "cv/Bhuvann_Vinodh_Ram_CV_Data_Analyst.pdf", projects: ["p-conflict", "p-retail", "p-vle", "p-hgsoc"],
+    da: { name: "Data Analyst", file: "cv/Bhuvann_Vinodh_Ram_CV_Data_Analyst.pdf", projects: ["p-checkout", "p-conflict", "p-retail", "p-vle", "p-hgsoc"],
           pitch: "For data analysis, the Conflict Risk Monitor dashboard and the retail sales analysis are the best starting points, followed by the survival analysis work on cancer data." },
     ai: { name: "AI Engineer", file: "cv/Bhuvann_Vinodh_Ram_CV_AI_Engineer.pdf", projects: ["p-tamil", "p-ecg", "p-hgsoc", "p-twitter", "p-brain"],
           pitch: "For AI engineering: Tamil Thedal (search, OpenCV.js and a chat helper), the ECG CNN at 96% test accuracy, and the HGSOC model where Bhuvann caught and fixed data leakage." },
