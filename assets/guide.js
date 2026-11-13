@@ -33,7 +33,7 @@
       text: "A 1D CNN that sorts heartbeats from the MIT-BIH dataset into five types, with 96.01% accuracy on 21,892 beats it never saw during training.",
       code: "https://github.com/bhuvannv13/ECG_Classification_CNN" },
     { id: "p-twitter", name: "Emotion classification from tweets", keys: "twitter tweets emotion nlp bilstm sentiment text gradio",
-      text: "A BiLSTM that reads tweets and guesses the emotion, using both word embeddings and a sentiment score. 90.63% test accuracy, and you can try it as a Gradio app.",
+      text: "A BiLSTM that reads tweets and guesses the emotion, using both word embeddings and a sentiment score. 90.67% test accuracy, and you can try it as a Gradio app.",
       code: "https://github.com/bhuvannv13/Twitter-Emotional-Classification" },
     { id: "p-brain", name: "Brain tumour classification", keys: "brain tumour tumor mri cnn streamlit resnet medical imaging",
       text: "CNNs that classify brain MRI scans into four classes (0.80 accuracy, 0.77 macro F1 on 2,258 test images), packaged as a Streamlit app with unit tests and CI.",
