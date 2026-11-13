@@ -72,7 +72,7 @@ PROJECTS = {
                  "bullets": {
                      "de": ["End-to-end pipeline: downloads UCDP conflict-event data (final and monthly releases) and World Bank indicators, builds a 176-country monthly panel, and publishes JSON to a static dashboard.",
                             "Scheduled GitHub Actions job refreshes data and retrains every month; pytest suite includes a check that features never use future data."],
-                     "da": ["Dashboard of country-level risk of armed-conflict violence: KPI tiles, trend charts, searchable table and country drill-downs, built from UCDP and World Bank open data.",
+                     "da": ["Dashboard of country-level risk of armed-conflict violence: KPI tiles, trend charts, searchable table and detail pages for each country, built from UCDP and World Bank open data.",
                             "Compared a persistence baseline, logistic regression and gradient boosting on a time-based split; on 2022–26 test data the chosen model reached ROC AUC 0.989 against 0.981 for the baseline."],
                      "ai": ["Estimates the probability of 25+ battle deaths per country in the next three months; gradient boosting chosen on a validation period scored ROC AUC 0.989 and average precision 0.959 on unseen 2022–26 data.",
                             "In-browser chat assistant (TF-IDF retrieval, no paid API) answers questions from the published data."]}},
@@ -81,7 +81,15 @@ PROJECTS = {
                  "tags": "SQL · dbt-style models · Python · statistics · GitHub Actions",
                  "bullets": {"all": ["Modelled messy raw event exports (simulated, 200,000 users) in nine SQL models across staging, intermediate and mart layers, with dbt-style data-quality tests.",
                                      "Experiment readout with SRM check, z-test, Welch t-test, bootstrap CI, CUPED, Holm correction and power/MDE: +5.2% relative conversion lift (p = 0.016)."]}},
-    "tamil": {"name": "Tamil Thedal (தமிழ் தேடல்)", "year": "2026",
+    "jobhunt": {"name": "Job Hunt Assistant", "year": "2026",
+                "links": [("Live", "https://bhuvannv13.github.io/job-hunt-assistant/"), ("Code", GH + "job-hunt-assistant")],
+                "tags": "Python · pytest · GitHub Actions · Pyodide · JavaScript",
+                "bullets": {
+                    "de": ["Daily GitHub Actions pipeline collects jobs from 65 employers' public Greenhouse, Lever, Ashby, Workable and SmartRecruiters boards, filters and publishes them to a static site.",
+                           "Rule-based checks for right-to-work restrictions, scam signals, ATS readability and unsupported claims in CVs, covered by 79 pytest tests."],
+                    "all": ["Web app that ranks graduate jobs from 65 employers' public job boards against an uploaded CV, explains each score and checks adverts for right-to-work restrictions and scam signals.",
+                            "Same Python modules run in the browser through Pyodide, so personal data never leaves the device; 79 pytest tests and daily GitHub Actions refresh."]}},
+    "tamil": {"name": "Tamil Thedal", "year": "2026",
               "links": [("Live", "https://bhuvannv13.github.io/tamil-thedal/"), ("Code", GH + "tamil-thedal")],
               "tags": "JavaScript · OpenCV.js · Tesseract.js · Python ETL",
               "bullets": {
@@ -97,7 +105,7 @@ PROJECTS = {
             "bullets": {"all": ["1D CNN classifying MIT-BIH heartbeats into five classes: 96.01% test accuracy on 21,892 held-out beats, reproduced by an automated GitHub Actions rerun."]}},
     "twitter": {"name": "Emotion classification from tweets", "year": "2025",
                 "links": [("Code", GH + "Twitter-Emotional-Classification")], "tags": "BiLSTM · TensorFlow · Gradio",
-                "bullets": {"all": ["Dual-input BiLSTM combining word embeddings with sentiment polarity: 90.63% test accuracy, served as a Gradio app."]}},
+                "bullets": {"all": ["Dual-input BiLSTM combining word embeddings with sentiment polarity to classify 916,575 tweets as angry, disappointed or happy: 90.67% test accuracy and 0.91 macro F1 on 91,658 held-out tweets, served as a Gradio app."]}},
     "brain": {"name": "Brain tumour classification from MRI", "year": "2025",
               "links": [("Code", GH + "Brain_Tumour_classification_api")], "tags": "CNN · OpenCV · Streamlit · pytest",
               "bullets": {"all": ["Four-class CNN (0.80 accuracy, 0.77 macro F1 on 2,258 test images) and ResNet50 transfer learning, deployed as a Streamlit app with unit tests and CI."]}},
@@ -156,7 +164,8 @@ SKILLS = {
            ("Professional", "Analytical thinking, decision making, client communication, client-facing work, clear written reporting for non-technical readers"),
            ("Data and databases", "Database management, database activity monitoring, database performance management, optimisation and tuning; SQL, Python (pandas), enterprise technologies"),
            ("Analysis", "Statistics, A/B testing, trend and risk analysis, dashboards (Tableau, Plotly)"),
-           ("AI for content", "Text classification (BiLSTM, TF-IDF), sentiment and emotion models, model evaluation and explainability (SHAP)")],
+           ("AI for content", "Text classification (BiLSTM, TF-IDF), sentiment and emotion models, model evaluation and explainability (SHAP)"),
+           ("Languages", "English and Tamil (both fluent)")],
 }
 
 EDUCATION = [
@@ -181,29 +190,44 @@ VARIANTS = {
     "Bhuvann_Vinodh_Ram_CV": {
         "label": "Full CV", "track": "all", "title": "Data and AI Graduate · MSc AI for Medicine (UCD)",
         "summary": "MSc AI for Medicine graduate (UCD) working across the data lifecycle: automated pipelines and SQL data modelling with data-quality tests; statistics, A/B testing and dashboards; and training, explaining and deploying machine learning for imaging, signals, text and genomics. Every project below has public code, most with tests, CI and a live demo. Currently a Trust and Safety Associate at Accenture, Dublin.",
-        "projects": ["conflict", "checkout", "tamil", "hgsoc", "ecg"],
-        "other": ["brain", "twitter", "prescription", "retail"],
+        "projects": ["conflict", "jobhunt", "checkout", "tamil", "hgsoc"],
+        "other": ["brain", "twitter", "retail"],
         "awards": "full"},
     "Bhuvann_Vinodh_Ram_CV_Data_Engineer": {
         "label": "Data Engineer", "track": "de", "title": "Graduate Data Engineer",
         "summary": "MSc AI for Medicine graduate (UCD) who builds reproducible data pipelines: automated extraction from APIs and bulk files, cleaning and modelling in pandas, tests and CI in GitHub Actions, and scheduled refreshes that publish results to the web. Industry experience containerising applications with Docker and deploying them through GitLab CI/CD. Currently a Trust and Safety Associate at Accenture, Dublin.",
-        "projects": ["conflict", "tamil", "hgsoc", "retail", "brain"],
+        "projects": ["conflict", "jobhunt", "tamil", "hgsoc", "retail"],
         "other": ["ecg", "vle", "rnaseq", "tableau"], "awards": "all"},
     "Bhuvann_Vinodh_Ram_CV_Data_Analyst": {
         "label": "Data Analyst", "track": "da", "title": "Graduate Data Analyst",
-        "summary": "MSc AI for Medicine graduate (UCD) who turns messy data into clear answers: scraping and cleaning data, statistical and survival analysis, and dashboards and reports written for non-technical readers. Python (pandas, seaborn), SQL, R and Tableau. Currently a Trust and Safety Associate at Accenture, Dublin, classifying content against detailed policy.",
+        "summary": "MSc AI for Medicine graduate (UCD) who turns messy data into clear answers: scraping and cleaning data, statistical and survival analysis, and dashboards and reports written for non-technical readers. Python (pandas, seaborn), SQL, R and Tableau. Currently a Trust and Safety Associate (Quality Expert Reviewer) at Accenture, Dublin, auditing content moderation decisions against client policy.",
         "projects": ["conflict", "retail", "vle", "hgsoc", "tableau"],
         "other": ["tamil", "rnaseq", "ecg", "twitter"], "awards": "all"},
     "Bhuvann_Vinodh_Ram_CV_AI_Engineer": {
         "label": "AI Engineer", "track": "ai", "title": "Graduate AI / Machine Learning Engineer",
         "summary": "MSc AI for Medicine graduate (UCD) who builds and ships machine learning: CNNs, BiLSTMs, VAEs and gradient boosting on imaging, signal, text and genomics data, with SHAP explanations, leakage checks, tests and CI. Deploys models as Streamlit and Gradio apps and in-browser tools that cost nothing to run. Currently a Trust and Safety Associate at Accenture, Dublin.",
-        "projects": ["tamil", "conflict", "ecg", "hgsoc", "twitter", "brain"],
+        "projects": ["tamil", "conflict", "jobhunt", "ecg", "hgsoc", "twitter"],
         "other": ["prescription", "omics", "teeth"], "awards": "all"},
+    "Bhuvann_Vinodh_Ram_CV_PhD_Responsible_AI": {
+        "label": "PhD – Responsible AI for Online Safety", "track": "ai", "title": "MSc AI for Medicine · Machine Learning and Online Safety",
+        "summary": "MSc AI for Medicine graduate (UCD) with research experience in deep learning and explainable AI, and hands-on Trust and Safety experience at Accenture, Dublin, where I moderate content and audit moderation decisions against platform policy. Builds machine learning on real-world text, imaging, signal and genomics data (BiLSTM text classification, CNNs, VAEs, gradient boosting) with SHAP explanations, leakage checks, tests and CI, and built an early-warning model for the risk of armed conflict from open event data.",
+        "projects": ["twitter", "conflict", "omics", "hgsoc", "ecg", "brain"],
+        "other": ["tamil", "prescription", "teeth"], "awards": "all"},
     "Bhuvann_Vinodh_Ram_CV_Trust_Safety_Knowledge_Transfer": {
         "label": "Trust & Safety (Knowledge Transfer)", "track": "ts", "title": "Trust and Safety Associate · Quality Expert Reviewer",
         "summary": "Trust and Safety Associate and Quality Expert Reviewer at Accenture, Dublin, moderating user-generated content and auditing moderation decisions against client policy. Turns detailed policy and quality findings into clear guidance for clients and colleagues, backed by an MSc in AI for Medicine (UCD) and a habit of writing reports and documentation for non-technical readers. Analytical, consistent under volume, and comfortable with sensitive content.",
         "projects": ["twitter", "conflict", "checkout", "tamil"],
         "other": ["hgsoc", "ecg", "brain", "retail"], "awards": "all"},
+    "Bhuvann_Vinodh_Ram_CV_Trust_Safety_Child_Safety": {
+        "label": "Trust & Safety (Child Safety)", "track": "ts", "title": "Trust and Safety Associate · Quality Expert Reviewer",
+        "summary": "Trust and Safety Associate and Quality Expert Reviewer at Accenture, Dublin, moderating user-generated content and auditing moderation decisions for accuracy and consistency with client policy. Careful and consistent with sensitive and distressing content, and precise in applying detailed policy to every decision. Fluent in English and Tamil, with an MSc in AI for Medicine (UCD) and experience building text-classification models that mirror how harmful content is triaged at scale.",
+        "projects": ["twitter", "conflict", "checkout", "tamil"],
+        "other": ["hgsoc", "ecg", "brain", "retail"], "awards": "all"},
+    "Bhuvann_Vinodh_Ram_CV_Trust_Safety_Shopping": {
+        "label": "Trust & Safety (Shopping)", "track": "ts", "title": "Trust and Safety Associate · Quality Expert Reviewer",
+        "summary": "Trust and Safety Associate and Quality Expert Reviewer at Accenture, Dublin, reviewing content against client platform policies and auditing moderation decisions for accuracy and consistency. Brings an analyst's eye to e-commerce and shopping data: retail sales analysis, an online checkout A/B test and SQL data modelling, plus an MSc in AI for Medicine (UCD). Analytical, consistent under volume and clear in communicating policy findings to clients and colleagues.",
+        "projects": ["checkout", "retail", "twitter", "conflict"],
+        "other": ["tamil", "hgsoc", "ecg", "brain"], "awards": "all"},
     "Bhuvann_Vinodh_Ram_CV_Trust_Safety_SME": {
         "label": "Trust & Safety (PPO SME)", "track": "ts", "title": "Trust and Safety Associate · Quality Expert Reviewer",
         "summary": "Trust and Safety Associate and Quality Expert Reviewer at Accenture, Dublin, with hands-on expertise in client platform policy: moderating user-generated content, auditing decisions for accuracy and consistency, and reviewing borderline cases. Client-facing, analytical and data-literate, with an MSc in AI for Medicine (UCD), SQL and Python skills, and experience building text-classification models that mirror how content is triaged at scale.",
@@ -215,16 +239,16 @@ CSS = """
 @page{size:A4;margin:13mm 15mm 12mm}
 *{box-sizing:border-box}
 html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-body{font-family:Inter,"Segoe UI",Arial,sans-serif;color:#1d2733;font-size:9.6pt;line-height:1.4;margin:0}
+body{font-family:Carlito,Calibri,"Liberation Sans",Arial,sans-serif;font-variant-ligatures:none;font-feature-settings:"liga" 0,"calt" 0;color:#1d2733;font-size:10.2pt;line-height:1.38;margin:0}
 @media screen{body{max-width:210mm;margin:24px auto;padding:13mm 15mm;background:#fff;box-shadow:0 2px 18px rgba(0,0,0,.12)}html{background:#eef1f4}}
 a{color:inherit;text-decoration:none}
-header{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;padding-bottom:8px;border-bottom:2.5pt solid #0b6e75;margin-bottom:2px}
-h1{font-size:23pt;line-height:1.05;margin:0;letter-spacing:-.02em;font-weight:700;color:#0f1b26}
+header{display:block;padding-bottom:7px;border-bottom:2.5pt solid #0b6e75;margin-bottom:2px}
+h1{font-size:23pt;line-height:1.05;margin:0;letter-spacing:0;font-weight:700;color:#0f1b26}
 .title{font-size:11pt;color:#0b6e75;font-weight:600;margin-top:4px}
-.contact{text-align:right;font-size:8.6pt;color:#3c4856;line-height:1.5}
+.contact{font-size:9.2pt;color:#3c4856;line-height:1.5;margin-top:5px}
 .contact a{color:#0b6e75}
 .auth{font-size:8.4pt;color:#566273;margin-top:5px}
-h2{break-after:avoid;font-size:9.6pt;text-transform:uppercase;letter-spacing:.12em;color:#0b6e75;font-weight:700;margin:12px 0 5px;padding-bottom:3px;border-bottom:.6pt solid #c9d3da}
+h2{break-after:avoid;font-size:9.6pt;text-transform:uppercase;letter-spacing:0;color:#0b6e75;font-weight:700;margin:12px 0 5px;padding-bottom:3px;border-bottom:.6pt solid #c9d3da}
 p{margin:0 0 3px}
 .summary{color:#2a3540}
 .item{margin-bottom:7px;break-inside:avoid}
@@ -272,11 +296,10 @@ def render(slug, variant):
     track = variant["track"]
     o = [f"<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'>",
          f"<title>{esc(PERSON['name'])} – {esc(variant['label'])} CV</title>",
-         "<link href='https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap' rel='stylesheet'>",
          f"<style>{CSS}</style></head><body>",
          "<header><div>",
          f"<h1>{esc(PERSON['name'])}</h1><div class='title'>{esc(variant['title'])}</div></div>",
-         "<div class='contact'>" + "<br>".join([
+         "<div class='contact'>" + " · ".join([
              esc(PERSON["location"]),
              f"<a href='tel:{PERSON['phone'].replace(' ', '')}'>{esc(PERSON['phone'])}</a>",
              f"<a href='mailto:{PERSON['email']}'>{esc(PERSON['email'])}</a>",
